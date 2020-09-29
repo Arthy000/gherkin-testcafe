@@ -1,6 +1,6 @@
 {
   "name": "gherkin-testcafe",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "author": "Lukas Kullmann <lukas.kullmann@kiwigrid.com>",
   "contributors": [
     "Wilhelm Behncke <behncke@sitegeist.de>",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kiwigrid/gherkin-testcafe"
+    "url": "https://github.com/Arthy000/gherkin-testcafe"
   },
   "license": "MIT",
   "keywords": [
@@ -38,7 +38,8 @@
     "prettier-check": "prettier --list-different 'src/**/*.{js,yaml,yml,json,md}'",
     "google-example": "node main.js chrome examples/google.ts ./examples/google.feature",
     "datatable-example": "node main.js chrome ./examples/datatable.js ./examples/datatable.feature",
-    "custom-param-type-example": "node main.js chrome examples/google.ts ./examples/custom-param-type.js ./examples/custom-param-type.feature --param-type-registry-file ./examples/custom-param-type-registry.js"
+    "custom-param-type-example": "node main.js chrome examples/google.ts ./examples/custom-param-type.js ./examples/custom-param-type.feature --param-type-registry-file ./examples/custom-param-type-registry.js",
+    "gitcommit": "git-cz"
   },
   "dependencies": {
     "gherkin": "^8.1.1"
@@ -48,8 +49,15 @@
     "testcafe": "^1.3.3"
   },
   "devDependencies": {
+    "commitizen": "^4.2.1",
     "cucumber": "^5.1.0",
+    "cz-conventional-changelog": "3.3.0",
     "prettier": "^1.17.1",
     "testcafe": "^1.8.6"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
