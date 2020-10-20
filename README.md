@@ -13,14 +13,14 @@ Once official support is established, this package will be abandoned.
 
 Install `gherkin-testcafe` and `cucumber`<sup>1</sup> via npm or yarn:
 
-    npm i gherkin-testcafe cucumber
+    npm i gherkin-testcafe cucumber@5.1.0
 
 or
 
-    yarn add gherkin-testcafe cucumber
+    yarn add gherkin-testcafe cucumber@5.1.0
 
 <sup>1</sup> This package internally uses [Cucumber.js](https://github.com/cucumber/cucumber-js) to parse step definitions.
-You will need it to define steps (see [Writing step definitions](#writing-step-definitions)).
+You will need it to define steps (see [Writing step definitions](#writing-step-definitions)). Only cucumber version 5.1.0 is supported.
 
 ## Upgrading from version 1.x
 
