@@ -16,6 +16,6 @@ Feature: The big search feature
     Then I should see that the first Google's result is "<result-text>"
 
     Examples:
-    | keyword  | result-text |
-    | facebook | Facebook    |
-    | twitter  | Twitter     |
+      | keyword  | result-text |
+      | facebook | Facebook    |
+      | twitter  | Twitter     |

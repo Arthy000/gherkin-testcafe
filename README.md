@@ -19,6 +19,9 @@ or
 
     yarn add gherkin-testcafe cucumber
 
+You may also install gherkin-testcafe globally in order to be able to use the
+CLI without npx.
+
 <sup>1</sup> This package internally uses [Cucumber.js](https://github.com/cucumber/cucumber-js) to parse step definitions.
 You will need it to define steps (see [Writing step definitions](#writing-step-definitions)).
 
@@ -47,7 +50,8 @@ When upgrading this package from version 1 to version 2, keep in mind, that the 
 
 ## CLI usage
 
-Use the `gherkin-testcafe` just like you use TestCafé's CLI. Just replace `testcafe` by `gherkin-testcafe` and load all JS and feature files:
+Use the `gherkin-testcafe` just like you use TestCafé's CLI. Just replace
+`testcafe` by `gherkin-testcafe` and load all JS and feature files:
 
     gherkin-testcafe firefox,IE tests/**/*.js tests/**/*.feature
     
@@ -61,17 +65,41 @@ Additionally, you can specify:
 
 * tags to run (see [Tags](#tags)):
 
-        gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG
-    
-    When using more than one tag, the list needs to be comma separated:
+    The `--tags` parameter can take a list of tags to filter scenarios in (or out)
+    of the test run.
 
-        gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,@TAG2
-    
-    Negation of a tag (via `~`) is also possible:
+    - including tag:
 
-        gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,~@TAG2
-    
-    This runs all scenarios that have `TAG1`, but not `TAG2`
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG
+
+        _This runs all scenarios that have `@TAG`_
+
+    - excluding tag:
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags ~@TAG
+            
+        _This runs all scenarios that don't have `@TAG`_
+
+    - list of tags:
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,@TAG2
+        
+        _This runs all scenarios that have `@TAG1` **or** `@TAG2`_
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,~@TAG2
+            
+        _This runs all scenarios that have `@TAG1` **and not** `@TAG2`_  
+
+    - `and` operation:
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and @TAG2"
+            
+        _This runs all scenarios that have `@TAG1` **and** `@TAG2`_
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and ~@TAG2, @TAG2 and ~@TAG1"
+            
+        _This runs all scenarios that have **either** `@TAG1` **or** `@TAG2`,
+        not both_ 
 
 * custom parameter types, (see [Cucumber Expressions](#cucumber-expressions))
 
@@ -183,6 +211,10 @@ Examples:
     runner.tags(['~@TAG']) // Will run all scenarios that are not marked with @TAG
 
     runner.tags(['@TAG', '~@OTHER_TAG']) // Will run all scenarios that are marked with @TAG but not with @OTHER_TAG
+    
+    runner.tags(['@TAG', '@OTHER_TAG']) // Will run all scenarios that are marked with @TAG or with @OTHER_TAG
+    
+    runner.tags(['@TAG and @OTHERTAG']) // Will run all scenarios that are marked with @TAG and with @OTHER_TAG
 ```
 
 __Note:__ Do not set `--tags` CLI parameter when running tests through the programming interface as it is internally used to pass the selected tags to the gherkin compiler.
