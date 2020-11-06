@@ -92,7 +92,15 @@ module.exports = class GherkinTestcafeCompiler {
 
         fixture(`Feature: ${gherkinDocument.feature.name}`)
           .before(ctx => this._runFeatureHooks(ctx, this.beforeAllHooks))
-          .after(ctx => this._runFeatureHooks(ctx, this.afterAllHooks));
+          .after(ctx => this._runFeatureHooks(ctx, this.afterAllHooks))
+          .meta(
+            'tags',
+            `${
+              gherkinDocument.feature.tags.length > 0
+                ? gherkinDocument.feature.tags.map(tag => tag.name).reduce((acc, cur) => `${acc},${cur}`)
+                : ''
+            }`
+          );
 
         gherkinResult.forEach(({ pickle: scenario }) => {
           if (!scenario || !this._shouldRunScenario(scenario)) {
@@ -117,7 +125,11 @@ module.exports = class GherkinTestcafeCompiler {
           })
             .page('about:blank')
             .before(t => this._runHooks(t, this._findHook(scenario, this.beforeHooks)))
-            .after(t => this._runHooks(t, this._findHook(scenario, this.afterHooks)));
+            .after(t => this._runHooks(t, this._findHook(scenario, this.afterHooks)))
+            .meta(
+              'tags',
+              scenario.tags.length > 0 ? scenario.tags.map(tag => tag.name).reduce((acc, cur) => `${acc},${cur}`) : ''
+            );
         });
 
         return testFile.collectedTests;
@@ -142,21 +154,20 @@ module.exports = class GherkinTestcafeCompiler {
 
     const compilerResult = this.externalCompilers.map(async externalCompiler => {
       const testFiles = this.stepFiles.filter(filename => {
+        let supportedExtensions = externalCompiler.getSupportedExtension();
 
-		  let supportedExtensions = externalCompiler.getSupportedExtension();
+        if (!Array.isArray(supportedExtensions)) {
+          supportedExtensions = [supportedExtensions];
+        }
 
-		  if (!Array.isArray(supportedExtensions)) {
-		  	supportedExtensions = [supportedExtensions];
-		  }
+        for (const extension of supportedExtensions) {
+          if (filename.endsWith(extension)) {
+            return true;
+          }
+        }
 
-		  for (const extension of supportedExtensions) {
-		  	if (filename.endsWith(extension)) {
-				return true;
-			}
-		  }
-
-		  return false;
-	  });
+        return false;
+      });
 
       const compiledCode = await externalCompiler.precompile(
         testFiles.map(filename => {
