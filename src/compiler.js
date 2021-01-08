@@ -10,6 +10,7 @@ const cucumberExpressions = require('cucumber-expressions');
 const TestcafeESNextCompiler = require('testcafe/lib/compiler/test-file/formats/es-next/compiler');
 const TestcafeTypescriptCompiler = require('testcafe/lib/compiler/test-file/formats/typescript/compiler');
 const { readFileSync } = require('fs');
+const chalk = require('chalk');
 
 const AND_SEPARATOR = ' and ';
 
@@ -67,28 +68,88 @@ module.exports = class GherkinTestcafeCompiler {
     });
   }
 
+  async _loadSpecs(specFile) {
+    const gherkinResult = await this._streamToArray(gherkin.fromPaths([specFile]));
+
+    const testFile = { filename: specFile, collectedTests: [] };
+    const fixture = new Fixture(testFile);
+
+    const { gherkinDocument } = gherkinResult[1];
+
+    if (!gherkinDocument) {
+      throw new Error(
+        [
+          'Failed to parse feature file ' + specFile,
+          ...gherkinResult
+            .filter(({ attachment }) => Boolean(attachment))
+            .map(({ attachment }) => attachment.source.uri + attachment.data)
+        ].join('\n')
+      );
+    }
+    return { gherkinResult, gherkinDocument, testFile, fixture };
+  }
+
+  _findStepDefinition(step) {
+    for (const stepDefinition of this.stepDefinitions) {
+      const [isMatched] = this._shouldRunStep(stepDefinition, { text: step });
+      if (isMatched) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async _dryRun() {
+    const featureStepsArray = await Promise.all(
+      this.specFiles.map(async specFile => {
+        const { gherkinResult, gherkinDocument } = await this._loadSpecs(specFile);
+
+        const featureTitle = `Feature: ${gherkinDocument.feature.name}`;
+        const featureSteps = [];
+        gherkinResult.forEach(({ pickle: scenario }) => {
+          if (scenario) {
+            scenario.steps.forEach(step => {
+              if (featureSteps.every(stepText => stepText !== step.text)) {
+                featureSteps.push(step.text);
+              }
+            });
+          }
+        });
+
+        const missingFeatureSteps = featureSteps.filter(step => !this._findStepDefinition(step));
+
+        return { featureTitle, featureSteps, missingFeatureSteps };
+      })
+    );
+
+    featureStepsArray.map(({ featureTitle, featureSteps, missingFeatureSteps }) => {
+      const color = missingFeatureSteps.length === 0 ? 'green' : 'red';
+      console.log(`\n   ${featureTitle}`);
+      console.log(
+        `     Steps: ${chalk[color](`${featureSteps.length - missingFeatureSteps.length}/${featureSteps.length}`)}`
+      );
+      if (missingFeatureSteps.length) {
+        console.log(
+          `     Missing steps:`,
+          chalk.red(missingFeatureSteps.reduce((acc, cur) => `${acc}\n        ${cur}`, ''))
+        );
+      }
+    });
+  }
+
   async getTests() {
     await this._loadStepDefinitions();
 
+    const dryRun = process.argv.findIndex(val => val === '--dry-run') !== -1;
+
+    if (dryRun) {
+      await this._dryRun();
+      process.exit(0);
+    }
+
     let tests = await Promise.all(
       this.specFiles.map(async specFile => {
-        const gherkinResult = await this._streamToArray(gherkin.fromPaths([specFile]));
-
-        const testFile = { filename: specFile, collectedTests: [] };
-        const fixture = new Fixture(testFile);
-
-        const { gherkinDocument } = gherkinResult[1];
-
-        if (!gherkinDocument) {
-          throw new Error(
-            [
-              'Failed to parse feature file ' + specFile,
-              ...gherkinResult
-                .filter(({ attachment }) => Boolean(attachment))
-                .map(({ attachment }) => attachment.source.uri + attachment.data)
-            ].join('\n')
-          );
-        }
+        const { gherkinResult, gherkinDocument, testFile, fixture } = await this._loadSpecs(specFile);
 
         fixture(`Feature: ${gherkinDocument.feature.name}`)
           .before(ctx => this._runFeatureHooks(ctx, this.beforeAllHooks))
