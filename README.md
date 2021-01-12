@@ -6,7 +6,7 @@
 
 1. [What it does](#what-it-does)
 2. [Installation](#installation)
-3. [Upgrading from previous version](#upgrading-from-version-1.x)
+3. [Upgrading from previous version](#upgrading-from-version-1x)
 4. [CLI Usage](#cli-usage)
 5. [Programming interface](#programming-interface)
 6. [Writing step definitions](#writing-step-definitions)
