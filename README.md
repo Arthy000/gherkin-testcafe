@@ -2,6 +2,27 @@
 
 > Run testcafe tests with gherkin syntax
 
+## Table of contents
+
+1. [What it does](#what-it-does)
+2. [Installation](#installation)
+3. [Upgrading from previous version](#upgrading-from-version-1.x)
+4. [CLI Usage](#cli-usage)
+5. [Programming interface](#programming-interface)
+6. [Writing step definitions](#writing-step-definitions)
+7. [Supported gherkin features and
+   limitations](#supported-gherkin-features-and-limitations)
+    1. [Tags](#tags)
+    2. [Cucumber Expressions](#cucumber-expressions)
+    3. [Hooks](#hooks)
+        1. [Before and After](#before-and-after)
+        2. [BeforeAll and AfterAll](#beforeall-and-afterall)
+    4. [Data tables](#data-tables)
+8. [Using typescript and ESnext features](#using-typescript-and-esnext-features)
+9. [Contributing](#contributing)
+    1. [Commits](#commits)
+    2. [Releases](#releases)
+
 ## What it does
 
 [TestCafé](https://devexpress.github.io/testcafe/) is a tool to write tool to automate end-to-end test fo websites.
@@ -337,3 +358,28 @@ Please make sure __not__ to install `@types/cucumber`!
 `gherkin-testcafe` will provide types for the `cucumber` module.
 
 Unfortunately, you cannot define your custom parameter types registry file in typescript or with ESnext features.
+
+## Contributing
+
+- The release branch is `master`.
+- The development branch is `develop`.
+
+Always create your new branch from `develop`.
+
+I'd appreaciate if you would use `git flow` (or follow its naming conventions)
+but it's not mandatory.
+
+Commits will generally not be accepted if they have not been properly formatted.
+
+### Commits
+
+The package has `commitizen` as a dev dependency.
+To create the proper commit, use `yarn gitcommit` and follow the prompts.
+
+Do not hesitate to create an issue if you need help.
+
+### Releases
+
+The package has `standard-version` as a dev dependency. It makes version
+management pretty easy, as long as commits have been properly formatted (hence
+the obligation to use `commitizen`)
