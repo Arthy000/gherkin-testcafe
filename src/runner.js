@@ -41,8 +41,9 @@ module.exports = class GherkinTestcafeRunner extends TestcafeRunner {
     if (this.apiMethodWasCalled.dryRun) {
       throw new GeneralError(RUNTIME_ERRORS.multipleAPIMethodCallForbidden, 'dryRun');
     }
-
-    process.argv.push('--dry-run', enabled);
+    if (enabled) {
+      process.argv.push('--dry-run');
+    }
     this.apiMethodWasCalled.dryRun = true;
 
     return this;
