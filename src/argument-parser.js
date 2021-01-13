@@ -14,7 +14,12 @@ module.exports = class GherkinTestcafeCliArgumentParser extends CliArgumentParse
 
     this.program.option(
       '--param-type-registry-file <file path>',
-      'Relative path to a file that exports a "cucumberExpressions.ParameterTypeRegistry" object'
+      'relative path to a file that exports a "cucumberExpressions.ParameterTypeRegistry" object'
+    );
+
+    this.program.option(
+      '--dry-run',
+      'start gherkin-testcafe in dry-run mode, this will output any step without a matching definition'
     );
   }
 };
