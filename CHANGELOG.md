@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/Arthy000/gherkin-testcafe/compare/v3.0.0...v3.0.1) (2021-01-13)
+
+
+### Bug Fixes
+
+* fix api dryrun always enabled ([58baad0](https://github.com/Arthy000/gherkin-testcafe/commit/58baad0c019c5dfd08054cf05822b80496f08da5))
+
 ## [3.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v2.4.2...v3.0.0) (2021-01-13)
 
 
