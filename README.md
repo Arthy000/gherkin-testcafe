@@ -2,6 +2,27 @@
 
 > Run testcafe tests with gherkin syntax
 
+## Table of contents
+
+1. [What it does](#what-it-does)
+2. [Installation](#installation)
+3. [Upgrading from previous version](#upgrading-from-version-1x)
+4. [CLI Usage](#cli-usage)
+5. [Programming interface](#programming-interface)
+6. [Writing step definitions](#writing-step-definitions)
+7. [Supported gherkin features and
+   limitations](#supported-gherkin-features-and-limitations)
+    1. [Tags](#tags)
+    2. [Cucumber Expressions](#cucumber-expressions)
+    3. [Hooks](#hooks)
+        1. [Before and After](#before-and-after)
+        2. [BeforeAll and AfterAll](#beforeall-and-afterall)
+    4. [Data tables](#data-tables)
+8. [Using typescript and ESnext features](#using-typescript-and-esnext-features)
+9. [Contributing](#contributing)
+    1. [Commits](#commits)
+    2. [Releases](#releases)
+
 ## What it does
 
 [TestCafé](https://devexpress.github.io/testcafe/) is a tool to write tool to automate end-to-end test fo websites.
@@ -18,6 +39,9 @@ Install `gherkin-testcafe` and `cucumber`<sup>1</sup> via npm or yarn:
 or
 
     yarn add gherkin-testcafe cucumber
+
+You may also install gherkin-testcafe globally in order to be able to use the
+CLI without npx.
 
 <sup>1</sup> This package internally uses [Cucumber.js](https://github.com/cucumber/cucumber-js) to parse step definitions.
 You will need it to define steps (see [Writing step definitions](#writing-step-definitions)).
@@ -47,7 +71,8 @@ When upgrading this package from version 1 to version 2, keep in mind, that the 
 
 ## CLI usage
 
-Use the `gherkin-testcafe` just like you use TestCafé's CLI. Just replace `testcafe` by `gherkin-testcafe` and load all JS and feature files:
+Use the `gherkin-testcafe` just like you use TestCafé's CLI. Just replace
+`testcafe` by `gherkin-testcafe` and load all JS and feature files:
 
     gherkin-testcafe firefox,IE tests/**/*.js tests/**/*.feature
     
@@ -61,17 +86,41 @@ Additionally, you can specify:
 
 * tags to run (see [Tags](#tags)):
 
-        gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG
-    
-    When using more than one tag, the list needs to be comma separated:
+    The `--tags` parameter can take a list of tags to filter scenarios in (or out)
+    of the test run.
 
-        gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,@TAG2
-    
-    Negation of a tag (via `~`) is also possible:
+    - including tag:
 
-        gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,~@TAG2
-    
-    This runs all scenarios that have `TAG1`, but not `TAG2`
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG
+
+        _This runs all scenarios that have `@TAG`_
+
+    - excluding tag:
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags ~@TAG
+            
+        _This runs all scenarios that don't have `@TAG`_
+
+    - list of tags:
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,@TAG2
+        
+        _This runs all scenarios that have `@TAG1` **or** `@TAG2`_
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,~@TAG2
+            
+        _This runs all scenarios that have `@TAG1` **and not** `@TAG2`_  
+
+    - `and` operation:
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and @TAG2"
+            
+        _This runs all scenarios that have `@TAG1` **and** `@TAG2`_
+
+            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and ~@TAG2, @TAG2 and ~@TAG1"
+            
+        _This runs all scenarios that have **either** `@TAG1` **or** `@TAG2`,
+        not both_ 
 
 * custom parameter types, (see [Cucumber Expressions](#cucumber-expressions))
 
@@ -183,6 +232,10 @@ Examples:
     runner.tags(['~@TAG']) // Will run all scenarios that are not marked with @TAG
 
     runner.tags(['@TAG', '~@OTHER_TAG']) // Will run all scenarios that are marked with @TAG but not with @OTHER_TAG
+    
+    runner.tags(['@TAG', '@OTHER_TAG']) // Will run all scenarios that are marked with @TAG or with @OTHER_TAG
+    
+    runner.tags(['@TAG and @OTHERTAG']) // Will run all scenarios that are marked with @TAG and with @OTHER_TAG
 ```
 
 __Note:__ Do not set `--tags` CLI parameter when running tests through the programming interface as it is internally used to pass the selected tags to the gherkin compiler.
@@ -305,3 +358,28 @@ Please make sure __not__ to install `@types/cucumber`!
 `gherkin-testcafe` will provide types for the `cucumber` module.
 
 Unfortunately, you cannot define your custom parameter types registry file in typescript or with ESnext features.
+
+## Contributing
+
+- The release branch is `master`.
+- The development branch is `develop`.
+
+Always create your new branch from `develop`.
+
+I'd appreaciate if you would use `git flow` (or follow its naming conventions)
+but it's not mandatory.
+
+Commits will generally not be accepted if they have not been properly formatted.
+
+### Commits
+
+The package has `commitizen` as a dev dependency.
+To create the proper commit, use `yarn gitcommit` and follow the prompts.
+
+Do not hesitate to create an issue if you need help.
+
+### Releases
+
+The package has `standard-version` as a dev dependency. It makes version
+management pretty easy, as long as commits have been properly formatted (hence
+the obligation to use `commitizen`)

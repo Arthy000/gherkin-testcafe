@@ -7,6 +7,7 @@ module.exports = class GherkinTestcafeRunner extends TestcafeRunner {
     super(...args);
     this.apiMethodWasCalled.tags = false;
     this.apiMethodWasCalled.parameterTypeRegistry = false;
+    this.apiMethodWasCalled.dryRun = false;
   }
 
   tags(...tags) {
@@ -21,6 +22,7 @@ module.exports = class GherkinTestcafeRunner extends TestcafeRunner {
     tags = this._prepareArrayParameter(tags);
 
     process.argv.push('--tags', tags.join(','));
+    this.apiMethodWasCalled.tags = true;
 
     return this;
   }
@@ -31,6 +33,17 @@ module.exports = class GherkinTestcafeRunner extends TestcafeRunner {
 
     process.argv.push('--param-type-registry-file', parameterTypeRegistryFilePath);
     this.apiMethodWasCalled.parameterTypeRegistry = true;
+
+    return this;
+  }
+
+  dryRun(enabled) {
+    if (this.apiMethodWasCalled.dryRun) {
+      throw new GeneralError(RUNTIME_ERRORS.multipleAPIMethodCallForbidden, 'dryRun');
+    }
+
+    process.argv.push('--dry-run', enabled);
+    this.apiMethodWasCalled.dryRun = true;
 
     return this;
   }

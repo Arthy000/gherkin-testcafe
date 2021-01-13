@@ -1,6 +1,6 @@
 {
   "name": "gherkin-testcafe",
-  "version": "2.5.2",
+  "version": "3.0.0",
   "author": "Lukas Kullmann <lukas.kullmann@kiwigrid.com>",
   "contributors": [
     "Wilhelm Behncke <behncke@sitegeist.de>",
@@ -39,7 +39,8 @@
     "google-example": "node main.js chrome examples/google.ts ./examples/google.feature",
     "datatable-example": "node main.js chrome ./examples/datatable.js ./examples/datatable.feature",
     "custom-param-type-example": "node main.js chrome examples/google.ts ./examples/custom-param-type.js ./examples/custom-param-type.feature --param-type-registry-file ./examples/custom-param-type-registry.js",
-    "gitcommit": "git-cz"
+    "gitcommit": "git-cz",
+    "release": "standard-version"
   },
   "dependencies": {
     "gherkin": "^8.1.1"
@@ -53,6 +54,7 @@
     "cucumber": "^5.1.0",
     "cz-conventional-changelog": "3.3.0",
     "prettier": "^1.17.1",
+    "standard-version": "^9.1.0",
     "testcafe": "^1.8.6"
   },
   "config": {
