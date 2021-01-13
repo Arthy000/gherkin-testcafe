@@ -1,8 +1,34 @@
 declare module 'gherkin-testcafe' {
-  import testcafe from 'testcafe';
+  global {
+    interface GherkinTestcafeRunner extends Runner {
+      tags(tags: string[]): GherkinTestcafeRunner;
+      parameterTypeRegistryFile(path: string): GherkinTestcafeRunner;
+      dryRun(enabled: boolean): GherkinTestcafeRunner;
+    }
+
+    interface GherkinTestCafe extends TestCafe {
+      /**
+       * Creates the test runner that is used to configure and launch test tasks.
+       */
+      createRunner(): GherkinTestcafeRunner;
+
+      /**
+       * Creates the live mode test runner that is used to configure and launch test tasks.
+       */
+      createLiveModeRunner(): GherkinTestcafeRunner;
+    }
+
+    interface GherkinTestCafeFactory extends TestCafeFactory {
+      (hostname?: string, port1?: number, port2?: number, sslOptions?: TlsOptions, developmentMode?: boolean): Promise<
+        GherkinTestCafe
+      >;
+    }
+  }
+
+  const createTestCafe: GherkinTestCafeFactory;
 
   export * from 'testcafe';
-  export default testcafe;
+  export default createTestCafe;
 }
 
 declare module 'cucumber' {
