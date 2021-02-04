@@ -9,6 +9,7 @@ const testRunTracker = require('testcafe/lib/api/test-run-tracker');
 const cucumberExpressions = require('cucumber-expressions');
 const TestcafeESNextCompiler = require('testcafe/lib/compiler/test-file/formats/es-next/compiler');
 const TestcafeTypescriptCompiler = require('testcafe/lib/compiler/test-file/formats/typescript/compiler');
+const CustomizableCompilers = require('testcafe/lib/configuration/customizable-compilers');
 const { readFileSync } = require('fs');
 const chalk = require('chalk');
 
@@ -54,8 +55,8 @@ module.exports = class GherkinTestcafeCompiler {
     this.tags = getTags();
     this.cucumberExpressionParamRegistry = getParameterTypeRegistry();
     this.externalCompilers = [
-      new TestcafeESNextCompiler(compilerOptions),
-      new TestcafeTypescriptCompiler(compilerOptions)
+      new TestcafeESNextCompiler(),
+      new TestcafeTypescriptCompiler(compilerOptions[CustomizableCompilers.typescript])
     ];
   }
 
