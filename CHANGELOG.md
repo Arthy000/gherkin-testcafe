@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v3.0.1...v4.0.0) (2021-02-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* the new version will only work with testcafe 1.10 and above
+
+### Bug Fixes
+
+* change the options given to typescript compiler ([6514445](https://github.com/Arthy000/gherkin-testcafe/commit/65144456e0122a10587f9833924250e02e4b67ff)), closes [#24](https://github.com/Arthy000/gherkin-testcafe/issues/24)
+* get rid of non-unix end of line ([6ad4cfd](https://github.com/Arthy000/gherkin-testcafe/commit/6ad4cfdbdf07507eebf2b1eb25fbafbacb67c3bd)), closes [#21](https://github.com/Arthy000/gherkin-testcafe/issues/21)
+
 ### [3.0.1](https://github.com/Arthy000/gherkin-testcafe/compare/v3.0.0...v3.0.1) (2021-01-13)
 
 
