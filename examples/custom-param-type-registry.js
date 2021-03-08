@@ -1,4 +1,4 @@
-const { ParameterTypeRegistry, ParameterType } = require('cucumber-expressions');
+const { ParameterTypeRegistry, ParameterType } = require('@cucumber/cucumber-expressions');
 
 class Color {
   constructor(name) {
