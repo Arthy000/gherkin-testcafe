@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v4.0.0...v5.0.0) (2021-03-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **cucumber library:** Any existing users of the library will need to update their cucumber imports from
+'cucumber' to '@cucumber/cucumber'
+
+* **cucumber library:** update to the latest cucumber library version ([3e47116](https://github.com/Arthy000/gherkin-testcafe/commit/3e47116c0b6cbc72a0e096b87264ec710317c16c)), closes [#22](https://github.com/Arthy000/gherkin-testcafe/issues/22)
+
 ## [4.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v3.0.1...v4.0.0) (2021-02-26)
 
 
