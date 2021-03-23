@@ -34,7 +34,7 @@ declare module 'gherkin-testcafe' {
 declare module 'cucumber' {
   import { t } from 'testcafe';
 
-  export interface TableDefinition {
+  export interface DataTable {
     /** Returns the table as a 2-D array. */
     raw(): string[][];
 
@@ -61,7 +61,7 @@ declare module 'cucumber' {
   export type StepFunction = (
     testController: typeof t,
     parameters: any[],
-    dataTable: TableDefinition | null
+    dataTable: DataTable | null
   ) => Promise<void>;
 
   export function Given(pattern: RegExp | string, code: StepFunction): void;

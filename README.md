@@ -34,11 +34,11 @@ Once official support is established, this package will be abandoned.
 
 Install `gherkin-testcafe` and `cucumber`<sup>1</sup> via npm or yarn:
 
-    npm i gherkin-testcafe cucumber
+    npm i gherkin-testcafe @cucumber/cucumber
 
 or
 
-    yarn add gherkin-testcafe cucumber
+    yarn add gherkin-testcafe @cucumber/cucumber
 
 You may also install gherkin-testcafe globally in order to be able to use the
 CLI without npx.

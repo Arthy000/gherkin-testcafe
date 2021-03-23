@@ -1,4 +1,4 @@
-import { When, Then } from 'cucumber';
+import { When, Then } from '@cucumber/cucumber';
 import { Selector as NativeSelector } from 'testcafe';
 
 const Selector = (input, t) => {

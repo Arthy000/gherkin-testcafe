@@ -43,15 +43,17 @@
     "release": "standard-version"
   },
   "dependencies": {
+    "@cucumber/cucumber": "^7.0.0",
+    "@cucumber/cucumber-expressions": "^12.0.0",
     "gherkin": "^8.1.1"
   },
   "peerDependencies": {
-    "cucumber": "^5.1.0",
+    "@cucumber/cucumber": "^7.0.0",
+    "@cucumber/cucumber-expressions": "^12.0.0",
     "testcafe": "^1.10.1"
   },
   "devDependencies": {
     "commitizen": "^4.2.1",
-    "cucumber": "^5.1.0",
     "cz-conventional-changelog": "3.3.0",
     "prettier": "^1.17.1",
     "standard-version": "^9.1.0",
