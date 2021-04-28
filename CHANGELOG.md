@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.1](https://github.com/Arthy000/gherkin-testcafe/compare/v5.0.0...v5.0.1) (2021-04-28)
+
+
+### Bug Fixes
+
+* **hooks:** fix cucumber hooks overwrite ([8401669](https://github.com/Arthy000/gherkin-testcafe/commit/8401669b5f6451932cef91af023d2605781fa766))
+
 ## [5.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v4.0.0...v5.0.0) (2021-03-23)
 
 
