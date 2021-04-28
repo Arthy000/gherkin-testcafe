@@ -31,7 +31,7 @@ declare module 'gherkin-testcafe' {
   export default createTestCafe;
 }
 
-declare module 'cucumber' {
+declare module '@cucumber/cucumber' {
   import { t } from 'testcafe';
 
   export interface DataTable {
