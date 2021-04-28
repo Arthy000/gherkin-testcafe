@@ -158,9 +158,10 @@ module.exports = class GherkinTestcafeCompiler {
           .after(ctx => this._runFeatureHooks(ctx, this.afterAllHooks))
           .meta(
             'tags',
-            `${gherkinDocument.feature.tags.length > 0
-              ? gherkinDocument.feature.tags.map(tag => tag.name).reduce((acc, cur) => `${acc},${cur}`)
-              : ''
+            `${
+              gherkinDocument.feature.tags.length > 0
+                ? gherkinDocument.feature.tags.map(tag => tag.name).reduce((acc, cur) => `${acc},${cur}`)
+                : ''
             }`
           );
 
@@ -361,5 +362,5 @@ module.exports = class GherkinTestcafeCompiler {
     return ['.js', '.ts', '.feature'];
   }
 
-  static cleanUp() { }
+  static cleanUp() {}
 };
