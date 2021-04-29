@@ -158,7 +158,7 @@ You can use all [other runner methods](https://devexpress.github.io/testcafe/doc
 To write step definitions, import `Given`, `When` and/ or `Then` from `cucumber`<sup>2</sup>:
 
 ```js
-import { Given, When, Then } from 'cucumber';
+import { Given, When, Then } from '@cucumber/cucumber';
 
 Given(/some precondition/, async (t) => {
     // The first argument of Given, When and Then will be a regex that matches the step.
@@ -310,7 +310,7 @@ Before/ After hooks run before or after each test (i.e. scenario).
 Each hook implementation gets TestCafé's test controller object as a parameter.
 
 ```js
-import { Before } from 'cucumber';
+import { Before } from '@cucumber/cucumber';
 
 Before('@tag1', async (t) => {
     // do something
@@ -327,7 +327,7 @@ Each hook implementation gets TestCafé's fixture context.
 See [Sharing Variables Between Fixture Hooks and Test Code](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#sharing-variables-between-fixture-hooks-and-test-code) documentation for more details.
 
 ```js
-import { BeforeAll } from 'cucumber';
+import { BeforeAll } from '@cucumber/cucumber';
 
 BeforeAll(async (ctx) => {
     // do something with the context

@@ -16,6 +16,11 @@ declare module 'gherkin-testcafe' {
        * Creates the live mode test runner that is used to configure and launch test tasks.
        */
       createLiveModeRunner(): GherkinTestcafeRunner;
+
+      /**
+       * Contains the URL of TestCafe for remote access
+       */
+      browserConnectionGateway: { connectUrl: string };
     }
 
     interface GherkinTestCafeFactory extends TestCafeFactory {
