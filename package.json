@@ -45,7 +45,7 @@
   "dependencies": {
     "@cucumber/cucumber": "^7.0.0",
     "@cucumber/cucumber-expressions": "^12.0.0",
-    "gherkin": "^8.1.1"
+    "@cucumber/gherkin-streams": "^2.0.2"
   },
   "peerDependencies": {
     "@cucumber/cucumber": "^7.0.0",

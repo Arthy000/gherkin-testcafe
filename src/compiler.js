@@ -1,4 +1,4 @@
-const gherkin = require('gherkin');
+const { GherkinStreams: gherkin } = require('@cucumber/gherkin-streams');
 const Fixture = require('testcafe/lib/api/structure/fixture');
 const Test = require('testcafe/lib/api/structure/test');
 const { GeneralError } = require('testcafe/lib/errors/runtime');
