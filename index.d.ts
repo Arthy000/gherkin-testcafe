@@ -66,7 +66,8 @@ declare module '@cucumber/cucumber' {
   export type StepFunction = (
     testController: typeof t,
     parameters: any[],
-    dataTable: DataTable | null
+    dataTable: DataTable | null,
+    docString: string | null
   ) => Promise<void>;
 
   export function Given(pattern: RegExp | string, code: StepFunction): void;
