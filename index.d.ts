@@ -51,6 +51,9 @@ declare module '@cucumber/cucumber' {
 
     /** Returns an array of objects where each row is converted to an object (column header is the key). */
     hashes(): Array<{ [colName: string]: string }>;
+
+    /** Returns a new instance with the data transposed */
+    transpose(): DataTable;
   }
 
   export type HookFunction = (testController: typeof t) => Promise<void>;
