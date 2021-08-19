@@ -40,24 +40,26 @@
     "datatable-example": "node main.js chrome ./examples/datatable.js ./examples/datatable.feature",
     "custom-param-type-example": "node main.js chrome examples/google.ts ./examples/custom-param-type.js ./examples/custom-param-type.feature --param-type-registry-file ./examples/custom-param-type-registry.js",
     "gitcommit": "git-cz",
+    "gitrecommit": "git-cz --retry",
+    "gitamend": "git-cz --amend",
     "release": "standard-version"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^7.0.0",
-    "@cucumber/cucumber-expressions": "^12.0.0",
-    "@cucumber/gherkin-streams": "^2.0.2"
+    "@cucumber/cucumber": "^7.3.1",
+    "@cucumber/cucumber-expressions": "^12.1.2",
+    "@cucumber/gherkin-streams": "^3.0.0"
   },
   "peerDependencies": {
-    "@cucumber/cucumber": "^7.0.0",
-    "@cucumber/cucumber-expressions": "^12.0.0",
-    "testcafe": "^1.10.1"
+    "@cucumber/cucumber": "^7.3.1",
+    "@cucumber/cucumber-expressions": "^12.1.2",
+    "testcafe": "^1.15.2"
   },
   "devDependencies": {
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
-    "prettier": "^1.17.1",
-    "standard-version": "^9.1.0",
-    "testcafe": "^1.10.1"
+    "prettier": "^2.3.2",
+    "standard-version": "^9.3.1",
+    "testcafe": "^1.15.2" 
   },
   "config": {
     "commitizen": {
