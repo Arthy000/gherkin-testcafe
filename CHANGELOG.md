@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.0.1...v5.1.0) (2021-07-16)
+
+
+### Features
+
+* docStrings support ([3ee6859](https://github.com/Arthy000/gherkin-testcafe/commit/3ee6859524e76e5e1a7815f981cc01bfa31586d9))
+
+
+### Bug Fixes
+
+* **cucumber:** add transpose to declared exports for cucumber ([d4e8117](https://github.com/Arthy000/gherkin-testcafe/commit/d4e8117f0bd94a868b8470017285c54489524d6b))
+
 ### [5.0.1](https://github.com/Arthy000/gherkin-testcafe/compare/v5.0.0...v5.0.1) (2021-04-28)
 
 
