@@ -17,23 +17,23 @@ const chalk = require('chalk');
 const AND_SEPARATOR = ' and ';
 
 const getTags = () => {
-  const tagsIndex = process.argv.findIndex(val => val === '--tags');
+  const tagsIndex = process.argv.findIndex((val) => val === '--tags');
   if (tagsIndex !== -1) {
     return process.argv[tagsIndex + 1]
       .split(',')
-      .map(tag => (tag.includes(AND_SEPARATOR) ? tag.split(AND_SEPARATOR) : tag));
+      .map((tag) => (tag.includes(AND_SEPARATOR) ? tag.split(AND_SEPARATOR) : tag));
   }
 
   return [];
 };
 
 const getParameterTypeRegistry = () => {
-  const parameterTypeRegistryIndex = process.argv.findIndex(val => val === '--param-type-registry-file');
+  const parameterTypeRegistryIndex = process.argv.findIndex((val) => val === '--param-type-registry-file');
 
   if (parameterTypeRegistryIndex !== -1) {
     const parameterTypeRegistryFilePath = process.argv[parameterTypeRegistryIndex + 1];
     const absFilePath = require.resolve(parameterTypeRegistryFilePath, {
-      paths: [process.cwd()]
+      paths: [process.cwd()],
     });
     return require(absFilePath);
   }
@@ -43,8 +43,8 @@ const getParameterTypeRegistry = () => {
 
 module.exports = class GherkinTestcafeCompiler {
   constructor(sources, compilerOptions) {
-    this.stepFiles = sources.filter(source => source.endsWith('.js') || source.endsWith('.ts'));
-    this.specFiles = sources.filter(source => source.endsWith('.feature'));
+    this.stepFiles = sources.filter((source) => source.endsWith('.js') || source.endsWith('.ts'));
+    this.specFiles = sources.filter((source) => source.endsWith('.feature'));
 
     this.stepDefinitions = [];
 
@@ -57,7 +57,7 @@ module.exports = class GherkinTestcafeCompiler {
     this.cucumberExpressionParamRegistry = getParameterTypeRegistry();
     this.externalCompilers = [
       new TestcafeESNextCompiler(),
-      new TestcafeTypescriptCompiler(compilerOptions[CustomizableCompilers.typescript])
+      new TestcafeTypescriptCompiler(compilerOptions[CustomizableCompilers.typescript]),
     ];
   }
 
@@ -84,7 +84,7 @@ module.exports = class GherkinTestcafeCompiler {
           'Failed to parse feature file ' + specFile,
           ...gherkinResult
             .filter(({ attachment }) => Boolean(attachment))
-            .map(({ attachment }) => attachment.source.uri + attachment.data)
+            .map(({ attachment }) => attachment.source.uri + attachment.data),
         ].join('\n')
       );
     }
@@ -103,22 +103,22 @@ module.exports = class GherkinTestcafeCompiler {
 
   async _dryRun() {
     const featureStepsArray = await Promise.all(
-      this.specFiles.map(async specFile => {
+      this.specFiles.map(async (specFile) => {
         const { gherkinResult, gherkinDocument } = await this._loadSpecs(specFile);
 
         const featureTitle = `Feature: ${gherkinDocument.feature.name}`;
         const featureSteps = [];
         gherkinResult.forEach(({ pickle: scenario }) => {
           if (scenario) {
-            scenario.steps.forEach(step => {
-              if (featureSteps.every(stepText => stepText !== step.text)) {
+            scenario.steps.forEach((step) => {
+              if (featureSteps.every((stepText) => stepText !== step.text)) {
                 featureSteps.push(step.text);
               }
             });
           }
         });
 
-        const missingFeatureSteps = featureSteps.filter(step => !this._findStepDefinition(step));
+        const missingFeatureSteps = featureSteps.filter((step) => !this._findStepDefinition(step));
 
         return { featureTitle, featureSteps, missingFeatureSteps };
       })
@@ -142,7 +142,7 @@ module.exports = class GherkinTestcafeCompiler {
   async getTests() {
     await this._loadStepDefinitions();
 
-    const dryRun = process.argv.findIndex(val => val === '--dry-run') !== -1;
+    const dryRun = process.argv.findIndex((val) => val === '--dry-run') !== -1;
 
     if (dryRun) {
       await this._dryRun();
@@ -150,20 +150,22 @@ module.exports = class GherkinTestcafeCompiler {
     }
 
     let tests = await Promise.all(
-      this.specFiles.map(async specFile => {
+      this.specFiles.map(async (specFile) => {
         const { gherkinResult, gherkinDocument, testFile, fixture } = await this._loadSpecs(specFile);
 
+        const meta = {
+          name: gherkinDocument.feature.name,
+          tags: `${
+            gherkinDocument.feature.tags.length > 0
+              ? gherkinDocument.feature.tags.map((tag) => tag.name).reduce((acc, cur) => `${acc},${cur}`)
+              : ''
+          }`,
+        };
+
         fixture(`Feature: ${gherkinDocument.feature.name}`)
-          .before(ctx => this._runFeatureHooks(ctx, this.beforeAllHooks))
-          .after(ctx => this._runFeatureHooks(ctx, this.afterAllHooks))
-          .meta(
-            'tags',
-            `${
-              gherkinDocument.feature.tags.length > 0
-                ? gherkinDocument.feature.tags.map(tag => tag.name).reduce((acc, cur) => `${acc},${cur}`)
-                : ''
-            }`
-          );
+          .before((ctx) => this._runFeatureHooks(ctx, meta, this.beforeAllHooks))
+          .after((ctx) => this._runFeatureHooks(ctx, meta, this.afterAllHooks))
+          .meta(meta);
 
         gherkinResult.forEach(({ pickle: scenario }) => {
           if (!scenario || !this._shouldRunScenario(scenario)) {
@@ -171,7 +173,7 @@ module.exports = class GherkinTestcafeCompiler {
           }
 
           const test = new Test(testFile);
-          test(`Scenario: ${scenario.name}`, async t => {
+          test(`Scenario: ${scenario.name}`, async (t) => {
             let error;
 
             try {
@@ -187,11 +189,11 @@ module.exports = class GherkinTestcafeCompiler {
             }
           })
             .page('about:blank')
-            .before(t => this._runHooks(t, this._findHook(scenario, this.beforeHooks)))
-            .after(t => this._runHooks(t, this._findHook(scenario, this.afterHooks)))
+            .before((t) => this._runHooks(t, this._findHook(scenario, this.beforeHooks)))
+            .after((t) => this._runHooks(t, this._findHook(scenario, this.afterHooks)))
             .meta(
               'tags',
-              scenario.tags.length > 0 ? scenario.tags.map(tag => tag.name).reduce((acc, cur) => `${acc},${cur}`) : ''
+              scenario.tags.length > 0 ? scenario.tags.map((tag) => tag.name).reduce((acc, cur) => `${acc},${cur}`) : ''
             );
         });
 
@@ -202,7 +204,7 @@ module.exports = class GherkinTestcafeCompiler {
     tests = tests.reduce((agg, cur) => agg.concat(cur));
 
     if (this.filter) {
-      tests = tests.filter(test => this.filter(test.name, test.fixture.name, test.fixture.path));
+      tests = tests.filter((test) => this.filter(test.name, test.fixture.name, test.fixture.path));
     }
 
     if (!tests.length) {
@@ -215,8 +217,8 @@ module.exports = class GherkinTestcafeCompiler {
   async _loadStepDefinitions() {
     supportCodeLibraryBuilder.reset(process.cwd(), IdGenerator.uuid());
 
-    const compilerResult = this.externalCompilers.map(async externalCompiler => {
-      const testFiles = this.stepFiles.filter(filename => {
+    const compilerResult = this.externalCompilers.map(async (externalCompiler) => {
+      const testFiles = this.stepFiles.filter((filename) => {
         let supportedExtensions = externalCompiler.getSupportedExtension();
 
         if (!Array.isArray(supportedExtensions)) {
@@ -233,7 +235,7 @@ module.exports = class GherkinTestcafeCompiler {
       });
 
       const compiledCode = await externalCompiler.precompile(
-        testFiles.map(filename => {
+        testFiles.map((filename) => {
           const code = readFileSync(filename, 'utf-8');
 
           return { code, filename };
@@ -276,7 +278,7 @@ module.exports = class GherkinTestcafeCompiler {
   }
 
   _findHook(scenario, hooks) {
-    return hooks.filter(hook => !hook.options.tags || scenario.tags.find(tag => tag.name === hook.options.tags));
+    return hooks.filter((hook) => !hook.options.tags || scenario.tags.find((tag) => tag.name === hook.options.tags));
   }
 
   async _runHooks(testController, hooks) {
@@ -285,9 +287,9 @@ module.exports = class GherkinTestcafeCompiler {
     }
   }
 
-  async _runFeatureHooks(fixtureCtx, hooks) {
+  async _runFeatureHooks(fixtureCtx, fixtureMeta, hooks) {
     for (const hook of hooks) {
-      await hook.code(fixtureCtx);
+      await hook.code(fixtureCtx, fixtureMeta);
     }
   }
 
@@ -319,7 +321,12 @@ module.exports = class GherkinTestcafeCompiler {
 
       const matchResult = cucumberExpression.match(step.text);
       return matchResult
-        ? [true, matchResult.map(r => r.getValue()), this._getCucumberDataTable(step), this._getCucumberDocString(step)]
+        ? [
+            true,
+            matchResult.map((r) => r.getValue()),
+            this._getCucumberDataTable(step),
+            this._getCucumberDocString(step),
+          ]
         : [false, [], this._getCucumberDataTable(step), this._getCucumberDocString(step)];
     } else if (stepDefinition.pattern instanceof RegExp) {
       const match = stepDefinition.pattern.exec(step.text);
@@ -327,7 +334,7 @@ module.exports = class GherkinTestcafeCompiler {
         Boolean(match),
         match ? match.slice(1) : [],
         this._getCucumberDataTable(step),
-        this._getCucumberDocString(step)
+        this._getCucumberDocString(step),
       ];
     }
 
@@ -337,21 +344,21 @@ module.exports = class GherkinTestcafeCompiler {
   }
 
   _getIncludingTags(tags) {
-    return tags.filter(tag => (Array.isArray(tag) ? true : !tag.startsWith('~')));
+    return tags.filter((tag) => (Array.isArray(tag) ? true : !tag.startsWith('~')));
   }
 
   _getExcludingTags(tags) {
     return tags
-      .filter(tag => (Array.isArray(tag) ? false : tag.startsWith('~')))
-      .map(tag => (!Array.isArray(tag) && tag.startsWith('~') ? tag.slice(1) : tag));
+      .filter((tag) => (Array.isArray(tag) ? false : tag.startsWith('~')))
+      .map((tag) => (!Array.isArray(tag) && tag.startsWith('~') ? tag.slice(1) : tag));
   }
 
   _scenarioHasAnyOfTheTags(scenario, tags) {
-    const scenarioTagsList = scenario.tags.map(tag => tag.name);
+    const scenarioTagsList = scenario.tags.map((tag) => tag.name);
 
     return (
       !tags.length ||
-      tags.some(tag => {
+      tags.some((tag) => {
         return Array.isArray(tag) ? this._scenarioHasAllOfTheTags(scenario, tag) : scenarioTagsList.includes(tag);
       })
     );
@@ -362,9 +369,9 @@ module.exports = class GherkinTestcafeCompiler {
   }
 
   _scenarioHasAllOfTheTags(scenario, tags) {
-    const scenarioTagsList = scenario.tags.map(tag => tag.name);
+    const scenarioTagsList = scenario.tags.map((tag) => tag.name);
 
-    return tags.every(tag =>
+    return tags.every((tag) =>
       tag.startsWith('~') ? !scenarioTagsList.includes(tag.slice(1)) : scenarioTagsList.includes(tag)
     );
   }
