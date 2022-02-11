@@ -24,9 +24,13 @@ declare module 'gherkin-testcafe' {
     }
 
     interface GherkinTestCafeFactory extends TestCafeFactory {
-      (hostname?: string, port1?: number, port2?: number, sslOptions?: TlsOptions, developmentMode?: boolean): Promise<
-        GherkinTestCafe
-      >;
+      (
+        hostname?: string,
+        port1?: number,
+        port2?: number,
+        sslOptions?: TlsOptions,
+        developmentMode?: boolean
+      ): Promise<GherkinTestCafe>;
     }
   }
 
@@ -57,7 +61,10 @@ declare module '@cucumber/cucumber' {
   }
 
   export type HookFunction = (testController: typeof t) => Promise<void>;
-  export type GlobalHookFunction = (fixtureContext: { [key: string]: any }) => Promise<void>;
+  export type GlobalHookFunction = (
+    fixtureContext: { [key: string]: any },
+    fixtureMeta: Record<string, string>
+  ) => Promise<void>;
 
   export function After(code: HookFunction): void;
   export function After(options: string, code: HookFunction): void;
