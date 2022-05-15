@@ -10,7 +10,7 @@ const cucumberExpressions = require('@cucumber/cucumber-expressions');
 const TestcafeESNextCompiler = require('testcafe/lib/compiler/test-file/formats/es-next/compiler');
 const TestcafeTypescriptCompiler = require('testcafe/lib/compiler/test-file/formats/typescript/compiler');
 const CustomizableCompilers = require('testcafe/lib/configuration/customizable-compilers');
-const { readFileSync } = require('fs');
+const { readFileSync, existsSync } = require('fs');
 const { IdGenerator } = require('@cucumber/messages');
 const chalk = require('chalk');
 
@@ -75,7 +75,6 @@ module.exports = class GherkinTestcafeCompiler {
 
     const testFile = { filename: specFile, collectedTests: [] };
     const fixture = new Fixture(testFile);
-
     const { gherkinDocument } = gherkinResult[1];
 
     if (!gherkinDocument) {
@@ -162,6 +161,17 @@ module.exports = class GherkinTestcafeCompiler {
           }`,
         };
 
+        // TODO: handle TS
+        const allowedExtentions = ['.js'];
+        const foundCredentialFiles = allowedExtentions
+          .map((extention) => specFile.slice(0, -8).concat('.credentials', extention))
+          .filter((filename) => existsSync(filename));
+        if (foundCredentialFiles.length > 1) {
+          console.warn(
+            `Looks like you have several credential files for ${specFile}. ${foundCredentialFiles[0]} will be used`
+          );
+        }
+
         fixture(`Feature: ${gherkinDocument.feature.name}`)
           .before((ctx) => this._runFeatureHooks(ctx, meta, this.beforeAllHooks))
           .after((ctx) => this._runFeatureHooks(ctx, meta, this.afterAllHooks))
@@ -172,8 +182,7 @@ module.exports = class GherkinTestcafeCompiler {
             return;
           }
 
-          const test = new Test(testFile);
-          test(`Scenario: ${scenario.name}`, async (t) => {
+          const test = new Test(testFile)(`Scenario: ${scenario.name}`, async (t) => {
             let error;
 
             try {
@@ -195,6 +204,10 @@ module.exports = class GherkinTestcafeCompiler {
               'tags',
               scenario.tags.length > 0 ? scenario.tags.map((tag) => tag.name).reduce((acc, cur) => `${acc},${cur}`) : ''
             );
+
+          if (foundCredentialFiles[0]) {
+            test.httpAuth(require(foundCredentialFiles[0]));
+          }
         });
 
         return testFile.collectedTests;
