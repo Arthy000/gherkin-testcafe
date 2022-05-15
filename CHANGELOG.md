@@ -2,12 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+
 ## [5.2.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.1.0...v5.2.0) (2022-02-15)
 
 
 ### Features
 
 * **globalhooks:** add the ability to access a copy of the features metadata ([#68](https://github.com/Arthy000/gherkin-testcafe/issues/68)) ([e87d6cc](https://github.com/Arthy000/gherkin-testcafe/commit/e87d6cce02d9cf7c26812595c588d3f137537554))
+
 
 ## [5.1.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.0.1...v5.1.0) (2021-07-16)
 
