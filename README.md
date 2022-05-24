@@ -9,9 +9,11 @@
 3. [Upgrading from previous version](#upgrading-from-version-1x)
 4. [CLI Usage](#cli-usage)
 5. [Programming interface](#programming-interface)
+    1. [Special Cases](#special-cases)
+        1. [Metadata](#metadata)
+        2. [Basic HTTP Authentication](#basic-http-authentication)
 6. [Writing step definitions](#writing-step-definitions)
-7. [Supported gherkin features and
-   limitations](#supported-gherkin-features-and-limitations)
+7. [Supported gherkin features and limitations](#supported-gherkin-features-and-limitations)
     1. [Tags](#tags)
     2. [Cucumber Expressions](#cucumber-expressions)
     3. [Hooks](#hooks)
@@ -152,6 +154,33 @@ module.exports = async () => {
 ```
 
 You can use all [other runner methods](https://devexpress.github.io/testcafe/documentation/using-testcafe/programming-interface/runner.html#methods), that you like as well (e.g. `filter`, `screenshots` and `reporter`).
+
+### Special cases
+
+Some features couldn't be implemented in the exact same way they work for regular TestCafe. This is mostly due to the fact that our compiler handles the [fixture](https://testcafe.io/documentation/402775/reference/test-api/global/fixture) and [test](https://testcafe.io/documentation/402774/reference/test-api/global/test) objects. This means that `fixture` and `test` methods are not available outside of the gherkin compiler.
+
+#### Metadata
+
+The [fixture.meta()](https://testcafe.io/documentation/402780/reference/test-api/fixture/meta) and [test.meta()](https://testcafe.io/documentation/402734/reference/test-api/test/meta) methods cannot be used directly. Instead, the compiler will automatically add the name of the feature and the tags attached to it in the fixture metadata. The test metadata will only contain the attached tags.
+
+At the moment, these are the only pieces of data that can be used by either. More could be added in the future, provided there are requests to do so.
+
+In turn, the metadata is accessible from within the test through the `beforeAll` and `afterAll` [hooks](#beforeall-and-afterall).
+
+#### Basic HTTP Authentication
+
+TestCafe doesn't display nor handle the browser's dialog boxes, so [Basic HTTP Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) can only be acheived by programmatically setting the Authorization header properly then accessing the page.
+
+To do this, regular TestCafe exposes the [fixture.httpAuth](https://testcafe.io/documentation/402781/reference/test-api/fixture/httpauth) and [test.httpAuth](https://testcafe.io/documentation/402735/reference/test-api/test/httpauth) methods.
+
+For the same reason as before, in gherkin-testcafe neither are accessible outside of the compiler.
+To work around that, you may create `featureFileName.credentials.js` next to `featureFileName.feature` that exports the needed credentials.
+
+That file being JS, you can get the credentials from any kind of source you'd like, as long as the end result is properly exported with the property names that httpAuth is expecting.
+
+The credentials are applied to all the tests in the feature. They will not be applied to any other feature, each feature file requires its own dedicated credential file.
+
+At the moment, httpAuth can only be used at the feature level.
 
 ## Writing step definitions
 
@@ -322,15 +351,15 @@ Untagged hooks are run before/ after each test.
 
 #### `BeforeAll` and `AfterAll`
 
-BeforeAll/ AfterAll hooks run before and after each fixture (i.e. feature).
+BeforeAll/AfterAll hooks run before or after each fixture (i.e. feature).
 Each hook implementation gets TestCafé's fixture context. 
 See [Sharing Variables Between Fixture Hooks and Test Code](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#sharing-variables-between-fixture-hooks-and-test-code) documentation for more details.
 
 ```js
 import { BeforeAll } from '@cucumber/cucumber';
 
-BeforeAll(async (ctx) => {
-    // do something with the context
+BeforeAll(async (ctx, meta) => {
+    // do something with the context and/or the meta
 })
 ```
 
