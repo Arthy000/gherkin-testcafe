@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.2.0...v5.3.0) (2022-05-24)
+
+
+### Features
+
+* **authentication:** add the ability to use http authentication ([fa1cf91](https://github.com/Arthy000/gherkin-testcafe/commit/fa1cf91834b6239120d3a5a0524f0bd34e65ac39)), closes [#76](https://github.com/Arthy000/gherkin-testcafe/issues/76)
+* **globalhooks:** add the ability to access a copy of the features metadata ([#68](https://github.com/Arthy000/gherkin-testcafe/issues/68)) ([7ead487](https://github.com/Arthy000/gherkin-testcafe/commit/7ead487943ca70d71c6a82b4851e23d18c62bc10))
+
 ### [5.2.1](https://github.com/Arthy000/gherkin-testcafe/compare/v5.2.0...v5.2.1) (2022-05-24)
 
 ## [5.2.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.1.0...v5.2.0) (2022-02-15)
