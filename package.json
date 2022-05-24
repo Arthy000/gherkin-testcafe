@@ -1,6 +1,6 @@
 {
   "name": "gherkin-testcafe",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "author": "Lukas Kullmann <lukas.kullmann@kiwigrid.com>",
   "contributors": [
     "Wilhelm Behncke <behncke@sitegeist.de>",
@@ -40,6 +40,7 @@
     "docstring-example": "node main.js chrome examples/doc-strings.*",
     "datatable-example": "node main.js chrome ./examples/datatable.js ./examples/datatable.feature",
     "custom-param-type-example": "node main.js chrome examples/google.ts ./examples/custom-param-type.js ./examples/custom-param-type.feature --param-type-registry-file ./examples/custom-param-type-registry.js",
+    "http-auth-example": "node main.js chrome ./examples/http-authentication-example.ts ./examples/http-authentication-example.feature",
     "gitcommit": "git-cz",
     "gitrecommit": "git-cz --retry",
     "gitamend": "git-cz --amend",
@@ -60,7 +61,7 @@
     "cz-conventional-changelog": "3.3.0",
     "prettier": "^2.5.1",
     "standard-version": "^9.3.2",
-    "testcafe": "^1.18.3"
+    "testcafe": "^1.18.6"
   },
   "config": {
     "commitizen": {
