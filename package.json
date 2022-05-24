@@ -29,9 +29,7 @@
     "src/"
   ],
   "types": "index.d.ts",
-  "bin": {
-    "gherkin-testcafe": "./main.js"
-  },
+  "bin": "./main.js",
   "main": "src/index.js",
   "scripts": {
     "prettier": "prettier --write 'src/**/*.js' README.md main.js index.d.ts",
@@ -47,9 +45,9 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^7.3.2",
-    "@cucumber/cucumber-expressions": "^12.1.2",
-    "@cucumber/gherkin-streams": "^3.0.0"
+    "@cucumber/cucumber": "^8.2.1",
+    "@cucumber/cucumber-expressions": "^15.1.1",
+    "@cucumber/gherkin-streams": "^5.0.1"
   },
   "peerDependencies": {
     "@cucumber/cucumber": "^7.3.1",
@@ -59,13 +57,14 @@
   "devDependencies": {
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
-    "prettier": "^2.5.1",
-    "standard-version": "^9.3.2",
+    "prettier": "^2.6.2",
+    "standard-version": "^9.5.0",
     "testcafe": "^1.18.6"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }
