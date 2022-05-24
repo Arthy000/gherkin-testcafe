@@ -11,6 +11,6 @@ When('I am searching for the {color} color on Google', async (t, [color]) => {
 });
 
 Then('I should see the {word} value in the page', async (t, [value]) => {
-  const result = Selector('span', t).withText(value);
+  const result = Selector('div', t).withText(value);
   await t.expect(result.visible).ok();
 });
