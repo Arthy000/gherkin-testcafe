@@ -34,6 +34,7 @@
   "scripts": {
     "prettier": "prettier --write 'src/**/*.js' README.md main.js index.d.ts",
     "prettier-check": "prettier --list-different 'src/**/*.{js,yaml,yml,json,md}'",
+    "examples": "node main.js chrome examples/* --param-type-registry-file ./examples/custom-param-type-registry.js",
     "google-example": "node main.js chrome examples/google.ts ./examples/google.feature",
     "docstring-example": "node main.js chrome examples/doc-strings.*",
     "datatable-example": "node main.js chrome ./examples/datatable.js ./examples/datatable.feature",
@@ -45,21 +46,24 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^8.2.1",
-    "@cucumber/cucumber-expressions": "^15.1.1",
-    "@cucumber/gherkin-streams": "^5.0.1"
+    "@cucumber/cucumber": "^8.2.2",
+    "@cucumber/cucumber-expressions": "^15.2.0",
+    "@cucumber/gherkin": "^24.0.0",
+    "@cucumber/gherkin-streams": "^5.0.1",
+    "@cucumber/message-streams": "^4.0.1",
+    "@cucumber/messages": "^19.0.0"
   },
   "peerDependencies": {
-    "@cucumber/cucumber": "^7.3.1",
-    "@cucumber/cucumber-expressions": "^12.1.2",
-    "testcafe": "^1.15.2"
+    "@cucumber/cucumber": "^8.0.0",
+    "@cucumber/cucumber-expressions": "^15.0.0",
+    "testcafe": "~1.18.0"
   },
   "devDependencies": {
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "prettier": "^2.6.2",
     "standard-version": "^9.5.0",
-    "testcafe": "^1.18.6"
+    "testcafe": "1.18.6"
   },
   "config": {
     "commitizen": {
