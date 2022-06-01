@@ -1,6 +1,6 @@
 # gherkin-testcafe
 
-> Run testcafe tests with gherkin syntax
+> Run TestCafé tests with the Gherkin syntax
 
 ## Table of contents
 
@@ -27,10 +27,10 @@
 
 ## What it does
 
-[TestCafé](https://devexpress.github.io/testcafe/) is a tool to write tool to automate end-to-end test fo websites.
-This package provides a compatibility layer to support of BDD-style tests to be run with TestCafé using the [Gherkin syntax](https://docs.cucumber.io/gherkin/).
+[TestCafé](https://devexpress.github.io/testcafe/) is a tool for automating end-to-end tests for websites.
+This package provides a compatibility layer so that BDD-style tests can be run with TestCafé using the [Gherkin syntax](https://docs.cucumber.io/gherkin/).
 Please note that [there seems to be a plan](https://github.com/DevExpress/testcafe/issues/1373#issuecomment-291526857) to officially support Gherkin syntax in TestCafé.
-Once official support is established, this package will be abandoned.
+Once official support has been established, this package will be abandoned.
 
 ## Installation
 
@@ -42,8 +42,8 @@ or
 
     yarn add gherkin-testcafe @cucumber/cucumber
 
-You may also install gherkin-testcafe globally in order to be able to use the
-CLI without npx.
+You may also install `gherkin-testcafe` globally in order to be able to use the
+CLI without `npx`.
 
 <sup>1</sup> This package internally uses [Cucumber.js](https://github.com/cucumber/cucumber-js) to parse step definitions.
 You will need it to define steps (see [Writing step definitions](#writing-step-definitions)).
@@ -53,13 +53,13 @@ You will need it to define steps (see [Writing step definitions](#writing-step-d
 With TestCafé version 2.0, this package has introduced some breaking changes to it's API.
 These changes help this package be more future-proof in terms of upcoming features.
 
-When upgrading this package from version 1 to version 2, keep in mind, that the following things have changed:
+When upgrading from version 1 to version 2, keep in mind that the following things have changed:
 
 * CLI interface is now passed through from TestCafé itself. So some options have changed:
   * `--specs`, `--steps`, `-s` and `-d` option no longer exist. Please define all the files as regular test files.
-    Also note, that all feature files have to have `.feature` file ending.
-  * `-b` option is now a shorthand for `--list-browsers` (as it is in the regular testcafe CLI). 
-    Define browsers like you would in testcafe.
+    Also note, that all feature files must have the `.feature` file extension.
+  * `-b` option is now a shorthand for `--list-browsers` (as it is in the regular TestCafé CLI). 
+    Define browsers like you would with TestCafé.
     See also [CLI usage](#cli-usage).
 * Step parameters are now passed to the step implementation as an array.
   Code needs to be refactored in the following way:
@@ -67,7 +67,7 @@ When upgrading this package from version 1 to version 2, keep in mind, that the 
   - Given(/some (.+) text (.+) with (.+) capturing (.+) groups/, async (t, param1, param2, param 3, param 4) => {});
   + Given(/some (.+) text (.+) with (.+) capturing (.+) groups/, async (t, [param1, param2, param 3, param 4]) => {});
   ```
-* BeforeAll and AfterAll hooks now run before/ after a feature, not a scenario. See also [BeforeAll and AfterAll](#beforeall-and-afterall).
+* BeforeAll and AfterAll hooks now run before/after a feature, not a scenario. See also [BeforeAll and AfterAll](#beforeall-and-afterall).
 * The same prohibition for multiple method calls as for testcafe@1.0.0 applies. See also [testcafe@1.0.0 release notes](https://github.com/DevExpress/testcafe/releases/tag/v1.0.0).
 * Legacy Docker support dropped
 
@@ -86,24 +86,24 @@ All [TestCafé CLI options](https://devexpress.github.io/testcafe/documentation/
 
 Additionally, you can specify:
 
-* tags to run (see [Tags](#tags)):
+* Tags to run (see [Tags](#tags)):
 
     The `--tags` parameter can take a list of tags to filter scenarios in (or out)
     of the test run.
 
-    - including tag:
+    - Including tag:
 
             gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG
 
         _This runs all scenarios that have `@TAG`_
 
-    - excluding tag:
+    - Excluding tag:
 
             gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags ~@TAG
             
         _This runs all scenarios that don't have `@TAG`_
 
-    - list of tags:
+    - List of tags:
 
             gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,@TAG2
         
@@ -124,7 +124,7 @@ Additionally, you can specify:
         _This runs all scenarios that have **either** `@TAG1` **or** `@TAG2`,
         not both_ 
 
-* custom parameter types, (see [Cucumber Expressions](#cucumber-expressions))
+* Custom parameter types, (see [Cucumber Expressions](#cucumber-expressions))
 
         gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --param-type-registry-file ./a-file-that-exports-a-parameter-type-registry.js
 
@@ -157,7 +157,7 @@ You can use all [other runner methods](https://devexpress.github.io/testcafe/doc
 
 ### Special cases
 
-Some features couldn't be implemented in the exact same way they work for regular TestCafe. This is mostly due to the fact that our compiler handles the [fixture](https://testcafe.io/documentation/402775/reference/test-api/global/fixture) and [test](https://testcafe.io/documentation/402774/reference/test-api/global/test) objects. This means that `fixture` and `test` methods are not available outside of the gherkin compiler.
+Some features couldn't be implemented in the exact same way they work for regular TestCafé. This is mostly due to the fact that our compiler handles the [fixture](https://testcafe.io/documentation/402775/reference/test-api/global/fixture) and [test](https://testcafe.io/documentation/402774/reference/test-api/global/test) objects. This means that `fixture` and `test` methods are not available outside of the gherkin compiler.
 
 #### Metadata
 
@@ -169,18 +169,18 @@ In turn, the metadata is accessible from within the test through the `beforeAll`
 
 #### Basic HTTP Authentication
 
-TestCafe doesn't display nor handle the browser's dialog boxes, so [Basic HTTP Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) can only be acheived by programmatically setting the Authorization header properly then accessing the page.
+TestCafé doesn't display nor handle the browser's dialog boxes, so [Basic HTTP Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) can only be achieved by programmatically setting the Authorization header properly, then accessing the page.
 
-To do this, regular TestCafe exposes the [fixture.httpAuth](https://testcafe.io/documentation/402781/reference/test-api/fixture/httpauth) and [test.httpAuth](https://testcafe.io/documentation/402735/reference/test-api/test/httpauth) methods.
+To do this, regular TestCafé exposes the [fixture.httpAuth](https://testcafe.io/documentation/402781/reference/test-api/fixture/httpauth) and [test.httpAuth](https://testcafe.io/documentation/402735/reference/test-api/test/httpauth) methods.
 
-For the same reason as before, in gherkin-testcafe neither are accessible outside of the compiler.
+For the same reason as before, in gherkin-testcafe, neither are accessible outside of the compiler.
 To work around that, you may create `featureFileName.credentials.js` next to `featureFileName.feature` that exports the needed credentials.
 
-That file being JS, you can get the credentials from any kind of source you'd like, as long as the end result is properly exported with the property names that httpAuth is expecting.
+That file being JS, you can get the credentials from any kind of source you'd like, as long as the end result is properly exported with the property names that `httpAuth` is expecting.
 
 The credentials are applied to all the tests in the feature. They will not be applied to any other feature, each feature file requires its own dedicated credential file.
 
-At the moment, httpAuth can only be used at the feature level.
+At the moment, `httpAuth` can only be used at the feature level.
 
 ## Writing step definitions
 
@@ -251,7 +251,8 @@ Most notable features are:
 
 Scenarios can be tagged using [Gherkin's @-notation](https://docs.cucumber.io/cucumber/api/#tags).
 The runner can then be configured to filter scenarios to be run based on these tags.
-The tags will be evaluated such that scenarios that have any of the including tags (begins with @) but none of the excluding tags (begins with ~@) will be run.
+The tags will be evaluated in such a way that scenarios that have any of the including tags (begins with @)
+but none of the excluding tags (begins with ~@) will be run.
 
 Examples:
 
@@ -322,7 +323,7 @@ Example:
 
     __Note:__ Do not set `--param-type-registry-file` CLI parameter when running tests through the programming interface as it is internally used to pass the path of the _ParameterTypeRegistry_ file to the gherkin compiler.
 
-Please refer to the examples folder, and the official [Cucumber Expressions](https://cucumber.io/docs/cucumber/cucumber-expressions/) documentation for more details.
+Please refer to the `examples` folder, and the official [Cucumber Expressions](https://cucumber.io/docs/cucumber/cucumber-expressions/) documentation for more details.
 
 ### Hooks
 
@@ -335,7 +336,7 @@ So be careful when using multiple hooks for the same scenario.
 
 #### `Before` and `After`
 
-Before/ After hooks run before or after each test (i.e. scenario).
+Before/After hooks run before or after each test (i.e. scenario).
 Each hook implementation gets TestCafé's test controller object as a parameter.
 
 ```js
@@ -376,7 +377,7 @@ When steps have a data table, they are passed an object with methods that can be
   
 see examples section for an example
 
-## Using typescript and ESnext features
+## Using Typescript and ESnext features
 
 With `gherkin-testcafe`, you can use Typescript and ESnext features (like es module import statements) the same way you can use them in regular TestCafé tests.
 In fact, it actually uses TestCafé's compilers to compile Typescript and ESNext files.
@@ -386,7 +387,7 @@ Please refer to [TestCafé's Typescript support manual page](https://devexpress.
 Please make sure __not__ to install `@types/cucumber`!
 `gherkin-testcafe` will provide types for the `cucumber` module.
 
-Unfortunately, you cannot define your custom parameter types registry file in typescript or with ESnext features.
+Unfortunately, you cannot define your custom parameter types registry file in Typescript or with ESnext features.
 
 ## Contributing
 
