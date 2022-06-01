@@ -1660,7 +1660,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/cucumber-expressions@npm:15.1.1, @cucumber/cucumber-expressions@npm:^15.1.1":
+"@cucumber/cucumber-expressions@npm:15.1.1":
   version: 15.1.1
   resolution: "@cucumber/cucumber-expressions@npm:15.1.1"
   dependencies:
@@ -1669,9 +1669,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/cucumber@npm:^8.2.1":
-  version: 8.2.1
-  resolution: "@cucumber/cucumber@npm:8.2.1"
+"@cucumber/cucumber-expressions@npm:^15.2.0":
+  version: 15.2.0
+  resolution: "@cucumber/cucumber-expressions@npm:15.2.0"
+  dependencies:
+    regexp-match-indices: 1.0.2
+  checksum: dcce27e80159df3989b7bfb4802ad648cf64b5bf9ff631660cc6010c0e0bd2a5dedebc1f550d5608cf098d37665525479dc4ba276344d91e10d4b590715273b3
+  languageName: node
+  linkType: hard
+
+"@cucumber/cucumber@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "@cucumber/cucumber@npm:8.2.2"
   dependencies:
     "@cspotcode/source-map-support": ^0.8.0
     "@cucumber/ci-environment": 9.0.4
@@ -1679,7 +1688,7 @@ __metadata:
     "@cucumber/gherkin": 23.0.1
     "@cucumber/gherkin-streams": 5.0.1
     "@cucumber/gherkin-utils": 7.0.0
-    "@cucumber/html-formatter": 19.1.0
+    "@cucumber/html-formatter": 19.2.0
     "@cucumber/message-streams": 4.0.1
     "@cucumber/messages": 18.0.0
     "@cucumber/tag-expressions": 4.1.0
@@ -1711,7 +1720,7 @@ __metadata:
     yup: ^0.32.11
   bin:
     cucumber-js: bin/cucumber.js
-  checksum: e0140150b3243a75e27952c3366a2383f0f28e2b878effa1f29dab4d5050a88a3a47bc74b305fd426bfe164363f011da928b84b35c8ab05e4739c97803efe39b
+  checksum: 5d4463eeacc9b6f53d1691ed539d0da244633d7bdeb72c4ee194bcc280bd2fdfc2a2c24c290436b75a35762975dbf653c4a8154660958255a309f37e86925ce8
   languageName: node
   linkType: hard
 
@@ -1753,16 +1762,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/html-formatter@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@cucumber/html-formatter@npm:19.1.0"
-  peerDependencies:
-    "@cucumber/messages": ">=18"
-  checksum: e0f807eff98a9e573aacd92bf04c2e0b913693197be5a232ecef98c59fb8b571d6f92e18ca0cc96775b3bf2261e30db07d4b819e825d74fd5a54534900b039e2
+"@cucumber/gherkin@npm:^24.0.0":
+  version: 24.0.0
+  resolution: "@cucumber/gherkin@npm:24.0.0"
+  dependencies:
+    "@cucumber/messages": ^19.0.0
+  checksum: aa2f56cfa67ce83a718aaf257ff9a5a7f044fb9683ad27887572b64a54fac05a8d98a733b1c894ecba04254966fe71134fdf2ef5cb0f2f47ccb6190fd81ffd0c
   languageName: node
   linkType: hard
 
-"@cucumber/message-streams@npm:4.0.1":
+"@cucumber/html-formatter@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@cucumber/html-formatter@npm:19.2.0"
+  peerDependencies:
+    "@cucumber/messages": ">=18"
+  checksum: 08aa06ad5502b0326cc9466e32ed911e0004533f6c4cc670793f756cb1661575aacf52cd2720581158ae63561dc60bb485039826814ce5d5fdaf3ac79275e53b
+  languageName: node
+  linkType: hard
+
+"@cucumber/message-streams@npm:4.0.1, @cucumber/message-streams@npm:^4.0.1":
   version: 4.0.1
   resolution: "@cucumber/message-streams@npm:4.0.1"
   peerDependencies:
@@ -1792,6 +1810,18 @@ __metadata:
     reflect-metadata: 0.1.13
     uuid: 8.3.2
   checksum: 360852bd76eb827fcb70cb2dd39dc16efe191186bb1ca99ab954eacd50b234323bb9bd24e39db5f12d4ebb5708ba6b06f39c74227a64bcf51428ee38f08e0f45
+  languageName: node
+  linkType: hard
+
+"@cucumber/messages@npm:^19.0.0":
+  version: 19.0.0
+  resolution: "@cucumber/messages@npm:19.0.0"
+  dependencies:
+    "@types/uuid": 8.3.4
+    class-transformer: 0.5.1
+    reflect-metadata: 0.1.13
+    uuid: 8.3.2
+  checksum: 2823ce96aec5953d55cdc955d778fa9bae7d901c8059eb154c9f81148fa061c7bfbcc2016a4e87ce7bef21c7cf77d5b898d3eb96e5a134a67f6bef0dbb215ae9
   languageName: node
   linkType: hard
 
@@ -3810,18 +3840,21 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gherkin-testcafe@workspace:."
   dependencies:
-    "@cucumber/cucumber": ^8.2.1
-    "@cucumber/cucumber-expressions": ^15.1.1
+    "@cucumber/cucumber": ^8.2.2
+    "@cucumber/cucumber-expressions": ^15.2.0
+    "@cucumber/gherkin": ^24.0.0
     "@cucumber/gherkin-streams": ^5.0.1
+    "@cucumber/message-streams": ^4.0.1
+    "@cucumber/messages": ^19.0.0
     commitizen: ^4.2.4
     cz-conventional-changelog: 3.3.0
     prettier: ^2.6.2
     standard-version: ^9.5.0
-    testcafe: ^1.18.6
+    testcafe: 1.18.6
   peerDependencies:
-    "@cucumber/cucumber": ^7.3.1
-    "@cucumber/cucumber-expressions": ^12.1.2
-    testcafe: ^1.15.2
+    "@cucumber/cucumber": ^8.0.0
+    "@cucumber/cucumber-expressions": ^15.0.0
+    testcafe: ~1.18.0
   bin:
     gherkin-testcafe: ./main.js
   languageName: unknown
@@ -6873,7 +6906,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe@npm:^1.18.6":
+"testcafe@npm:1.18.6":
   version: 1.18.6
   resolution: "testcafe@npm:1.18.6"
   dependencies:
