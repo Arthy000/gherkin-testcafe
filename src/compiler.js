@@ -182,15 +182,19 @@ module.exports = class GherkinTestcafeCompiler {
             return;
           }
 
+          const setFailIndex = (test, index) => test.meta({ failIndex: index });
           const test = new Test(testFile)(`Scenario: ${scenario.name}`, async (t) => {
             let error;
+            let index = 0;
 
             try {
               for (const step of scenario.steps) {
                 await this._resolveAndRunStepDefinition(t, step);
+                index += 1;
               }
             } catch (e) {
               error = e;
+              setFailIndex(test, index);
             }
 
             if (error) {
@@ -200,10 +204,16 @@ module.exports = class GherkinTestcafeCompiler {
             .page('about:blank')
             .before((t) => this._runHooks(t, this._findHook(scenario, this.beforeHooks)))
             .after((t) => this._runHooks(t, this._findHook(scenario, this.afterHooks)))
-            .meta(
-              'tags',
-              scenario.tags.length > 0 ? scenario.tags.map((tag) => tag.name).reduce((acc, cur) => `${acc},${cur}`) : ''
-            );
+            .meta({
+              tags:
+                scenario.tags.length > 0
+                  ? scenario.tags.map((tag) => tag.name).reduce((acc, cur) => `${acc},${cur}`)
+                  : '',
+              steps: scenario.steps.map(({ type, text }) => ({
+                type,
+                text,
+              })),
+            });
 
           if (foundCredentialFiles[0]) {
             test.httpAuth(require(foundCredentialFiles[0]));

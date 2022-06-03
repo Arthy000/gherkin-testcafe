@@ -20,6 +20,7 @@
         1. [Before and After](#before-and-after)
         2. [BeforeAll and AfterAll](#beforeall-and-afterall)
     4. [Data tables](#data-tables)
+    5. [Step reporting](#step-reporting)
 8. [Using typescript and ESnext features](#using-typescript-and-esnext-features)
 9. [Contributing](#contributing)
     1. [Commits](#commits)
@@ -243,7 +244,7 @@ Most notable features are:
 - Features (Gherkin `feature` keyword): Will be transformed into a [TestCafé fixture](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#fixtures).
 - Scenarios (Gherkin `scenario` keyword): Will be transformed into a [TestCafé test](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#tests).
 - Backgrounds (Gherkin `background` keyword): Background steps are prepended to Scenario/ Scenario outline steps. `Before` hooks are run before background steps. 
-- Scenario outlines (Gherkin `scenario outline` and `examples` keywords): Will transform every example into on [TestCafé test](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#tests).
+- Scenario outlines (Gherkin `Scenario Outline` and `Examples` keywords): Will transform every example into on [TestCafé test](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#tests).
 - Tags/ Hooks: See [Tags](#tags) and [Hooks](#hooks).
 - [Cucumber Expressions](#cucumber-expressions)
 
@@ -281,7 +282,7 @@ Example:
 1. Create a _ParameterTypeRegistry_ (e.g. _myCustomParamRegistry.js_):
 
     ```js
-    import { ParameterTypeRegistry, ParameterType } from 'cucumber-expressions';
+    import { ParameterTypeRegistry, ParameterType } from '@cucumber/cucumber-expressions';
 
     class Color {
         constructor(name) {
@@ -318,12 +319,12 @@ Example:
 4. Configure the _runner_ to use your custom _ParameterTypeRegistry_:
 
     ```js
-    runner.parameterTypeRegistryFile(require.resolve('./myCustomParamRegistry.js'))
+    runner.parameterTypeRegistryFile('./myCustomParamRegistry.js')
     ```
 
     __Note:__ Do not set `--param-type-registry-file` CLI parameter when running tests through the programming interface as it is internally used to pass the path of the _ParameterTypeRegistry_ file to the gherkin compiler.
 
-Please refer to the `examples` folder, and the official [Cucumber Expressions](https://cucumber.io/docs/cucumber/cucumber-expressions/) documentation for more details.
+Please refer to the [examples directory](./examples), and the official [Cucumber Expressions](https://cucumber.io/docs/cucumber/cucumber-expressions/) documentation for more details.
 
 ### Hooks
 
@@ -375,7 +376,90 @@ When steps have a data table, they are passed an object with methods that can be
   - `raw`: returns the table as a 2-D array
   - `rowsHash`: returns an object where each row corresponds to an entry (first column is the key, second column is the value)
   
-see examples section for an example
+See the [examples directory](./examples) for an example.
+
+### Step reporting
+
+By default, the reporter used by TestCafé is `spec`. 
+TestCafé has no reason to handle the concept of "step" because it's a notion that is specific to gherkin.
+
+To work around that:
+- The metadata of a `test` now contains the full list of steps that compose the `scenario` it's based on.
+In case of failure of a step, its index is also added to the metadata.
+- A custom reporter (`gtc-reporter-spec`) has been added to the project.
+It is automatically used instead of spec as the default reporter for `gherkin-testcafe`. 
+Note that `spec` remains usable by simply using the `reporter` option provided by TestCafé:
+    ```bash
+    gherkin-testcafe chrome ./tests/* --reporter spec
+    ```
+    If you use the API,
+    ```js
+    runner.reporter("spec")
+    ```
+- Custom internal reporters have also been created based on `list` and `minimal`. 
+The gtc reporters behave in exactly the same way as their TestCafé counterparts, except that the steps are part of the 
+output, with highlighing indicating which ones succeeded, which ones failed, and which ones didn't run.
+    ```diff
+    + ✓ Given some step that succeeded
+    - ✖ When some step that failed
+    # - Then some step that didn't run
+    ```
+
+    To use one of this package's internal reporters, use its name in the reporter option:
+    ```bash
+    gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-list
+    gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-minimal
+    gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-spec # unnecessary as it is the default behavior
+    ```
+
+Note that other official reporters could be adapted in the future.
+#### Implement / Adapt a custom reporter
+
+If you are using a [custom reporter](https://testcafe.io/documentation/402810/guides/extend-testcafe/reporter-plugin) 
+and want to use or display the step information, all you need to do is access the metadata from your reporter's methods.
+
+Fortunately, accessing metadata is [built-in behavior](https://testcafe.io/documentation/402810/guides/extend-testcafe/reporter-plugin#implement-the-reporter) for normal TestCafé reporters:
+TestCafé will pass the metadata object to your test reporting function as the third argument.
+
+The properties that are dedicated to this feature are `steps` and `failIndex`. 
+Each step in the `steps` array has two properties: `type` and `text`.
+
+Representation:
+```json
+{
+    "failIndex": 1,
+    "steps": [
+        { "type": "Context", "text": "some step that succeeded"},
+        { "type": "Action", "text": "some step that failed"},
+        { "type": "Outcome", "text": "some step that didn't run"}
+    ] 
+}
+```
+
+Usage example:
+```js
+const reportTestDone = function (name, testRunInfo, meta) { 
+    const keywords = { Context: 'Given ', Action: 'When ', Outcome: 'Then ' };
+    meta.steps
+      .map((step) => keywords[step.type].concat(step.text))
+      .forEach((phrase, index) => {
+        let color;
+        let symbol;
+        if (index < meta.failIndex) {
+          color = 'green';
+          symbol = this.symbols.ok;
+        } else if (index === meta.failIndex) {
+          color = 'red';
+          symbol = this.symbols.err;
+        } else {
+          color = 'grey';
+          symbol = '-';
+        }
+        this.write(this.chalk[color](symbol, phrase));
+        this.newline();
+      });
+},
+```
 
 ## Using Typescript and ESnext features
 
