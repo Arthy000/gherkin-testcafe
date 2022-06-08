@@ -66,7 +66,7 @@ const reportTestDone = function (name, testRunInfo, meta) {
     this.setIndent(2).useWordWrap(true);
     const keywords = { Context: 'Given ', Action: 'When ', Outcome: 'Then ' };
     const formattedSteps = meta.steps
-      .map((step) => keywords[step.type].concat(step.text))
+      .map((step) => (keywords[step.type] || '').concat(step.text))
       .map((phrase, index) => {
         let symbol;
         let color;
