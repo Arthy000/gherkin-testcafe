@@ -13,7 +13,7 @@ const _renderErrors = function (errs) {
   this.setIndent(3).newline();
 
   errs.forEach((err, idx) => {
-    var prefix = this.chalk.red(`${idx + 1}) `);
+    const prefix = this.chalk.red(`${idx + 1}) `);
     this.newline().write(this.formatError(err, prefix)).newline().newline();
   });
 };
@@ -42,9 +42,9 @@ const reportFixtureStart = function (name) {
 };
 
 const reportTestDone = function (name, testRunInfo, meta) {
-  var hasErr = !!testRunInfo.errs.length;
-  var symbol = null;
-  var nameStyle = null;
+  let hasErr = !!testRunInfo.errs.length;
+  let symbol = null;
+  let nameStyle = null;
 
   if (testRunInfo.skipped) {
     this.skipped++;
@@ -59,7 +59,7 @@ const reportTestDone = function (name, testRunInfo, meta) {
     nameStyle = this.chalk.grey;
   }
 
-  const title = `${symbol} ${nameStyle(name)}`;
+  let title = `${symbol} ${nameStyle(name)}`;
 
   this.setIndent(1).useWordWrap(true);
 
@@ -74,7 +74,7 @@ const reportTestDone = function (name, testRunInfo, meta) {
     this.setIndent(2).useWordWrap(true);
     const keywords = { Context: 'Given ', Action: 'When ', Outcome: 'Then ' };
     meta.steps
-      .map((step) => keywords[step.type].concat(step.text))
+      .map((step) => (keywords[step.type] || '').concat(step.text))
       .forEach((phrase, index) => {
         let color;
         let symbol;
