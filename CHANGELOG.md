@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.2](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.1...v5.4.2) (2022-06-08)
+
+
+### Bug Fixes
+
+* **reporter:** take into account the absence of keyword ([3d7c8e2](https://github.com/Arthy000/gherkin-testcafe/commit/3d7c8e2ef042893a6fd98606f803b28c9e787697)), closes [#89](https://github.com/Arthy000/gherkin-testcafe/issues/89)
+
 ### [5.4.1](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.0...v5.4.1) (2022-06-08)
 
 
