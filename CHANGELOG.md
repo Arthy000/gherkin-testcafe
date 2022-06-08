@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.1](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.0...v5.4.1) (2022-06-08)
+
+
+### Bug Fixes
+
+* **reporter:** fix various issues in the custom reporters ([8e2ee9b](https://github.com/Arthy000/gherkin-testcafe/commit/8e2ee9be6dcda21f89b73aa4a8f63fe2461f832f)), closes [#89](https://github.com/Arthy000/gherkin-testcafe/issues/89) [#90](https://github.com/Arthy000/gherkin-testcafe/issues/90)
+
 ## [5.4.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.3.1...v5.4.0) (2022-06-04)
 
 
