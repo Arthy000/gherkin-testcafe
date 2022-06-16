@@ -69,7 +69,7 @@ const reportTestDone = function (name, testRunInfo, meta) {
   this.setIndent(1).useWordWrap(true).write(title);
 
   if (hasErr) {
-    this.setIndent(2).useWordWrap(true);
+    this.setIndent(2).useWordWrap(true).newline();
     const keywords = { Context: 'Given ', Action: 'When ', Outcome: 'Then ' };
     meta.steps
       .map((step) => (keywords[step.type] || '').concat(step.text))
