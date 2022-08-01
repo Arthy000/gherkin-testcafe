@@ -57,7 +57,7 @@ module.exports = class GherkinTestcafeCompiler {
     this.cucumberExpressionParamRegistry = getParameterTypeRegistry();
     this.externalCompilers = [
       new TestcafeESNextCompiler(compilerOptions[CustomizableCompilers.typescript]),
-      new TestcafeTypescriptCompiler(),
+      new TestcafeTypescriptCompiler(compilerOptions[CustomizableCompilers.typescript])
     ];
   }
 
