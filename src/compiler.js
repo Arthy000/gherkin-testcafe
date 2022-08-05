@@ -21,6 +21,7 @@ const getTags = () => {
   if (tagsIndex !== -1) {
     return process.argv[tagsIndex + 1]
       .split(',')
+      .map((tag) => tag.trim())
       .map((tag) => (tag.includes(AND_SEPARATOR) ? tag.split(AND_SEPARATOR) : tag));
   }
 
@@ -32,10 +33,14 @@ const getParameterTypeRegistry = () => {
 
   if (parameterTypeRegistryIndex !== -1) {
     const parameterTypeRegistryFilePath = process.argv[parameterTypeRegistryIndex + 1];
+
     const absFilePath = require.resolve(parameterTypeRegistryFilePath, {
       paths: [process.cwd()],
     });
-    return require(absFilePath);
+    const customTypeRegistry = require(absFilePath);
+    return customTypeRegistry instanceof cucumberExpressions.ParameterTypeRegistry
+      ? customTypeRegistry
+      : new cucumberExpressions.ParameterTypeRegistry();
   }
 
   return new cucumberExpressions.ParameterTypeRegistry();
@@ -71,6 +76,9 @@ module.exports = class GherkinTestcafeCompiler {
   }
 
   async _loadSpecs(specFile) {
+    if (!specFile) {
+      throw new Error('No spec file path provided');
+    }
     const gherkinResult = await this._streamToArray(gherkin.fromPaths([specFile]));
 
     const testFile = { filename: specFile, collectedTests: [] };
@@ -255,20 +263,13 @@ module.exports = class GherkinTestcafeCompiler {
     supportCodeLibraryBuilder.reset(process.cwd(), IdGenerator.uuid());
 
     const compilerResult = this.externalCompilers.map(async (externalCompiler) => {
+      let supportedExtensions = externalCompiler.getSupportedExtension();
+      if (!Array.isArray(supportedExtensions)) {
+        supportedExtensions = [supportedExtensions];
+      }
+
       const testFiles = this.stepFiles.filter((filename) => {
-        let supportedExtensions = externalCompiler.getSupportedExtension();
-
-        if (!Array.isArray(supportedExtensions)) {
-          supportedExtensions = [supportedExtensions];
-        }
-
-        for (const extension of supportedExtensions) {
-          if (filename.endsWith(extension)) {
-            return true;
-          }
-        }
-
-        return false;
+        return supportedExtensions.some((extension) => filename.endsWith(extension));
       });
 
       const compiledCode = await externalCompiler.precompile(
