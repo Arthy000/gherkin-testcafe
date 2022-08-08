@@ -480,7 +480,7 @@ Unfortunately, you cannot define your custom parameter types registry file in Ty
 
 Always create your new branch from `develop`.
 
-I'd appreaciate if you would use `git flow` (or follow its naming conventions)
+I'd appreciate if you would use `git flow` (or follow its naming conventions)
 but it's not mandatory.
 
 Commits will generally not be accepted if they have not been properly formatted.
