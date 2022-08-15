@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.4](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.3...v5.4.4) (2022-08-15)
+
+
+### Bug Fixes
+
+* **compiler.js:** updated Testcafe dependency to 1.20 and fixed sourc… ([#98](https://github.com/Arthy000/gherkin-testcafe/issues/98)) ([33dd883](https://github.com/Arthy000/gherkin-testcafe/commit/33dd88354a8a4afa7ab72a3b8a3d8420ad37ee79)), closes [#97](https://github.com/Arthy000/gherkin-testcafe/issues/97) [#97](https://github.com/Arthy000/gherkin-testcafe/issues/97)
+
 ### [5.4.3](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.2...v5.4.3) (2022-06-16)
 
 
