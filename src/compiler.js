@@ -57,7 +57,7 @@ module.exports = class GherkinTestcafeCompiler {
     this.cucumberExpressionParamRegistry = getParameterTypeRegistry();
     this.externalCompilers = [
       new TestcafeESNextCompiler({}),
-      new TestcafeTypescriptCompiler(compilerOptions[CustomizableCompilers.typescript])
+      new TestcafeTypescriptCompiler(compilerOptions[CustomizableCompilers.typescript]),
     ];
   }
 
@@ -172,7 +172,7 @@ module.exports = class GherkinTestcafeCompiler {
           );
         }
 
-        fixture(`Feature: ${gherkinDocument.feature.name}`)
+        fixture(`${gherkinDocument.feature.keyword}: ${gherkinDocument.feature.name}`)
           .before((ctx) => this._runFeatureHooks(ctx, meta, this.beforeAllHooks))
           .after((ctx) => this._runFeatureHooks(ctx, meta, this.afterAllHooks))
           .meta(meta);
@@ -182,8 +182,14 @@ module.exports = class GherkinTestcafeCompiler {
             return;
           }
 
+          const backgroundNode = gherkinDocument.feature.children.find((node) => node.background);
+
+          const scenarioNode = gherkinDocument.feature.children
+            .filter((node) => node.scenario)
+            .find((node) => node.scenario.id === scenario.astNodeIds[0]);
+
           const setFailIndex = (test, index) => test.meta({ failIndex: index });
-          const test = new Test(testFile)(`Scenario: ${scenario.name}`, async (t) => {
+          const test = new Test(testFile)(`${scenarioNode.scenario.keyword}: ${scenario.name}`, async (t) => {
             let error;
             let index = 0;
 
@@ -209,10 +215,18 @@ module.exports = class GherkinTestcafeCompiler {
                 scenario.tags.length > 0
                   ? scenario.tags.map((tag) => tag.name).reduce((acc, cur) => `${acc},${cur}`)
                   : '',
-              steps: scenario.steps.map(({ type, text }) => ({
-                type,
-                text,
-              })),
+              steps: scenario.steps.map(({ type, text, astNodeIds }) => {
+                const backgroundStepNode = backgroundNode?.background.steps.find(
+                  (stepNode) => stepNode.id === astNodeIds[0]
+                );
+                const stepNode = scenarioNode.scenario.steps.find((stepNode) => stepNode.id === astNodeIds[0]);
+                return {
+                  type,
+                  prefix: backgroundStepNode ? backgroundNode.background.keyword : undefined,
+                  keyword: backgroundStepNode ? backgroundStepNode.keyword : stepNode.keyword,
+                  text,
+                };
+              }),
             });
 
           if (foundCredentialFiles[0]) {
