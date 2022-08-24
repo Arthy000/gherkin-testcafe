@@ -3,7 +3,7 @@ Feature: The big search feature
   I want to find TestCafe repository by Google search
 
   @googleHook
-  Scenario: Searching for TestCafe by Google
+  Scenario: Searching for TestCafe on Google
     Given I open Google's search page
     When I dismiss the privacy statement when it appears
     And I am typing my search request "github TestCafe" on Google

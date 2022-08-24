@@ -64,24 +64,26 @@ const reportTestDone = function (name, testRunInfo, meta) {
 
   if (hasErr) {
     this.setIndent(2).useWordWrap(true);
-    const keywords = { Context: 'Given ', Action: 'When ', Outcome: 'Then ' };
-    const formattedSteps = meta.steps
-      .map((step) => (keywords[step.type] || '').concat(step.text))
-      .map((phrase, index) => {
-        let symbol;
-        let color;
-        if (index < meta.failIndex) {
-          color = 'green';
-          symbol = this.symbols.ok;
-        } else if (index === meta.failIndex) {
-          color = 'red';
-          symbol = this.symbols.err;
-        } else {
-          color = 'grey';
-          symbol = '-';
-        }
-        return this.chalk[color](`${symbol} ${phrase}`);
-      });
+    const formattedSteps = meta.steps.map((step, index) => {
+      let symbol;
+      let color;
+      if (index < meta.failIndex) {
+        color = 'green';
+        symbol = this.symbols.ok;
+      } else if (index === meta.failIndex) {
+        color = 'red';
+        symbol = this.symbols.err;
+      } else {
+        color = 'grey';
+        symbol = '-';
+      }
+      return [
+        this.chalk[color](symbol, ' '),
+        step.prefix ? this.chalk.white(`${step.prefix}:  `) : '',
+        this.chalk[color](step.keyword),
+        this.chalk[color](step.text),
+      ].join('');
+    });
 
     this.errDescriptors = this.errDescriptors.concat(
       testRunInfo.errs.map((err) => {

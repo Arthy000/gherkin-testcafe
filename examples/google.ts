@@ -13,17 +13,14 @@ Before('@googleHook', async () => {
   console.log('Running Google e2e test.');
 });
 
-Given("I open Google's search page", async t => {
+Given("I open Google's search page", async (t) => {
   await t.navigateTo('https://www.google.com');
 });
 
-When(/^I dismiss the privacy statement when it appears$/, async t => {
+When(/^I dismiss the privacy statement when it appears$/, async (t) => {
   const elem = Selector(privacyModale, t);
   const acceptButton = Selector('#L2AGLb > div', t);
-  await t
-    .expect(elem.exists)
-    .ok('The privacy statement should be displayed', { timeout: 5000 })
-    .click(acceptButton);
+  await t.expect(elem.exists).ok('The privacy statement should be displayed', { timeout: 5000 }).click(acceptButton);
 
   // forcefully remove as it seems google knows when an automated session is running
   // await removeElement(t, privacyModale);
@@ -46,7 +43,7 @@ Then(/^I should see that the first Google's result is "(.+)"$/, async (t, [expec
 });
 
 async function removeElement(t, elementSelector) {
-  await ClientFunction(elementSelector => {
+  await ClientFunction((elementSelector) => {
     const element = document.querySelector(elementSelector);
     element.parentNode.removeChild(element);
   }).with(t)(elementSelector);
