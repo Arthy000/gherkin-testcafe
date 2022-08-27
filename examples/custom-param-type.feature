@@ -4,8 +4,12 @@ Feature: Using custom parameter types
 
   @googleHook
   Scenario: Searching for color in Google
-    Given I open Google's search page
-    When I dismiss the privacy statement when it appears
-    And I am searching for the blue color on Google
-    And I am pressing "enter" key on Google
-    Then I should see the #0000FF value in the page
+    Given I opened Google's search page
+    And I dismissed the privacy statement when it appeared
+    When I search for the "blue" color on Google
+    And I press the "enter" key
+    Then I should see the "#0000FF" result in the page
+
+# here, blue and #0000FF are recognized by Cucumber as being respectively
+# a color (based on the custome typing)
+# and a word (based on Cucumber default types)

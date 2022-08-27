@@ -10,14 +10,14 @@ const Selector = (input, t) => {
 const privacyModale = '#xe7COe';
 
 Before('@googleHook', async () => {
-  console.log('Running Google e2e test.');
+  console.log('\nBackground step: Running Google e2e test.\n');
 });
 
-Given("I open Google's search page", async (t) => {
+Given("I opened Google's search page", async (t) => {
   await t.navigateTo('https://www.google.com');
 });
 
-When(/^I dismiss the privacy statement when it appears$/, async (t) => {
+Given(/^I dismissed the privacy statement when it appeared$/, async (t) => {
   const elem = Selector(privacyModale, t);
   const acceptButton = Selector('#L2AGLb > div', t);
   await t.expect(elem.exists).ok('The privacy statement should be displayed', { timeout: 5000 }).click(acceptButton);
@@ -26,13 +26,13 @@ When(/^I dismiss the privacy statement when it appears$/, async (t) => {
   // await removeElement(t, privacyModale);
 });
 
-When(/^I am typing my search request "(.+)" on Google$/, async (t, [searchRequest]) => {
+When(/^I type my search request "(.+)" on Google$/, async (t, [searchRequest]) => {
   const input = Selector('[name="q"]', t);
 
   await t.typeText(input, searchRequest);
 });
 
-When(/^I am pressing "(.+)" key on Google$/, async (t, [key]) => {
+When(/^I press the "(.+)" key$/, async (t, [key]) => {
   await t.pressKey(key);
 });
 

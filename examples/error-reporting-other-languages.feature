@@ -4,7 +4,7 @@ Fonctionnalité: reporting in other languages
     Showcase how keywords are handled when working in another language than English
 
     Contexte:
-        Soit I open Google's search page
+        Soit I opened Google's search page
 
     Scénario: Report in other language
         # Given I defined my test in another language
