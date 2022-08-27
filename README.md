@@ -427,11 +427,13 @@ Each step in the `steps` array has two properties: `type` and `text`.
 Representation:
 ```json
 {
-    "failIndex": 1,
+    "failIndex": 2,
     "steps": [
-        { "type": "Context", "text": "some step that succeeded"},
-        { "type": "Action", "text": "some step that failed"},
-        { "type": "Outcome", "text": "some step that didn't run"}
+        { "type": "Context", "keyword": "Given", "prefix": "Background", "text": "some background step"}
+        { "type": "Context", "keyword": "Given", "text": "some step that succeeded"},
+        { "type": "Action", "keyword": "When", "text": "some step that failed"},
+        { "type": "Action", "keyword": "And", "text": "some step that didn't run"},
+        { "type": "Outcome", "keyword": "Then", "text": "some other step that didn't run"}
     ] 
 }
 ```
@@ -439,25 +441,26 @@ Representation:
 Usage example:
 ```js
 const reportTestDone = function (name, testRunInfo, meta) { 
-    const keywords = { Context: 'Given ', Action: 'When ', Outcome: 'Then ' };
-    meta.steps
-      .map((step) => keywords[step.type].concat(step.text))
-      .forEach((phrase, index) => {
+    meta.steps.forEach((step, index) => {
         let color;
         let symbol;
         if (index < meta.failIndex) {
-          color = 'green';
-          symbol = this.symbols.ok;
+            color = 'green';
+            symbol = this.symbols.ok;
         } else if (index === meta.failIndex) {
-          color = 'red';
-          symbol = this.symbols.err;
+            color = 'red';
+            symbol = this.symbols.err;
         } else {
-          color = 'grey';
-          symbol = '-';
+            color = 'grey';
+            symbol = '-';
         }
-        this.write(this.chalk[color](symbol, phrase));
+        this.write(this.chalk[color](symbol));
+        if (step.prefix) {
+            this.write(this.chalk.white(`${step.prefix}:`));
+        }
+        this.write(this.chalk[color](`${step.keyword}${step.text}`));
         this.newline();
-      });
+    });
 },
 ```
 

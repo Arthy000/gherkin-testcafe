@@ -3,8 +3,7 @@ Feature: Reporting background step status
     I want to see backgroubd steps marked as such in my reports
 
     Background:
-        Given I open Google's search page
-        And I open Google's search page
+        Given I opened Google's search page
 
     Scenario: No step definition
         Given I forgot to implement some step
