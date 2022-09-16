@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.5.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.4...v5.5.0) (2022-09-16)
+
+
+### Features
+
+* **reporting:** improve reporting capabilities with step keywords ([46dcc41](https://github.com/Arthy000/gherkin-testcafe/commit/46dcc41017ba188912e9e88bca87c75cc94a5229)), closes [#99](https://github.com/Arthy000/gherkin-testcafe/issues/99)
+
 ### [5.4.4](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.3...v5.4.4) (2022-08-15)
 
 
