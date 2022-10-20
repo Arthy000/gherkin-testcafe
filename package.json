@@ -60,7 +60,8 @@
     "@cucumber/gherkin": "^24.0.0",
     "@cucumber/gherkin-streams": "^5.0.1",
     "@cucumber/message-streams": "^4.0.1",
-    "@cucumber/messages": "^19.1.2"
+    "@cucumber/messages": "^19.1.2",
+    "chalk": "4.1.2"
   },
   "peerDependencies": {
     "@cucumber/cucumber": "^8.0.0",
