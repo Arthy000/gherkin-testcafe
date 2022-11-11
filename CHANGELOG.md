@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.5.1](https://github.com/Arthy000/gherkin-testcafe/compare/v5.5.0...v5.5.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* **dependencies:** add chalk dependency ([7ac895e](https://github.com/Arthy000/gherkin-testcafe/commit/7ac895efcd21551199feb9716ef93617f456a93c)), closes [#103](https://github.com/Arthy000/gherkin-testcafe/issues/103)
+
 ## [5.5.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.4.4...v5.5.0) (2022-09-16)
 
 
