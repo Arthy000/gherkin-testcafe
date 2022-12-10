@@ -4415,10 +4415,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fp-ts@npm:^2.12.1":
-  version: 2.12.3
-  resolution: "fp-ts@npm:2.12.3"
-  checksum: 398acad3d8c5fbd4b0ee420bbb57a45cd98f54e22d6240fc3ee88a7c9967536cba9285c858d37251f9dea137d767a0ff2354203046ba9a149c064fd8de9fe0e3
+"fp-ts@npm:^2.9.5":
+  version: 2.13.1
+  resolution: "fp-ts@npm:2.13.1"
+  checksum: 618e0028aca9ff1d52b86f438499ccab149825bdab14c678d22c3e2ccbf9d36fd1f26d463bf0ae1e63f5cd79dd54c8218af2cca0daeea68b039307b751ae9563
   languageName: node
   linkType: hard
 
@@ -4616,7 +4616,7 @@ __metadata:
     jest: ^28.1.1
     prettier: ^2.7.1
     standard-version: ^9.5.0
-    testcafe: 1.20.0
+    testcafe: 2.1.0
   peerDependencies:
     "@cucumber/cucumber": ^8.0.0
     "@cucumber/cucumber-expressions": ^15.0.0
@@ -4954,6 +4954,13 @@ __metadata:
     agent-base: 6
     debug: 4
   checksum: e2ee1ff1656a131953839b2a19cd1f3a52d97c25ba87bd2559af6ae87114abf60971e498021f9b73f9fd78aea8876d1fb0d4656aac8a03c6caa9fc175f22b786
+  languageName: node
+  linkType: hard
+
+"http-status-codes@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "http-status-codes@npm:2.2.0"
+  checksum: 31e1d730856210445da0907d9b484629e69e4fe92ac032478a7aa4d89e5b215e2b4e75d7ebce40d0537b6850bd281b2f65c7cc36cc2677e5de056d6cea1045ce
   languageName: node
   linkType: hard
 
@@ -5374,6 +5381,15 @@ __metadata:
   version: 1.1.0
   resolution: "is-plain-obj@npm:1.1.0"
   checksum: 0ee04807797aad50859652a7467481816cbb57e5cc97d813a7dcd8915da8195dc68c436010bf39d195226cde6a2d352f4b815f16f26b7bf486a5754290629931
+  languageName: node
+  linkType: hard
+
+"is-podman@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "is-podman@npm:1.0.1"
+  bin:
+    is-podman: cli.js
+  checksum: 9a72f5fced41c49d4ba6b11ef4d134b557b1773de7c5ecee8f875a2ce056d54e965a795a76d8fb5fd47889ff296093cce6063ad3ca83bd26bf4278828cec68e4
   languageName: node
   linkType: hard
 
@@ -8376,9 +8392,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe-hammerhead@npm:24.5.24":
-  version: 24.5.24
-  resolution: "testcafe-hammerhead@npm:24.5.24"
+"testcafe-hammerhead@npm:28.1.0":
+  version: 28.1.0
+  resolution: "testcafe-hammerhead@npm:28.1.0"
   dependencies:
     acorn-hammerhead: 0.6.1
     asar: ^2.0.1
@@ -8404,7 +8420,7 @@ __metadata:
     tough-cookie: 4.0.0
     tunnel-agent: 0.6.0
     webauth: ^1.1.0
-  checksum: 5c8b3c2f47e45c578d2dfe5be281a3b1e3718e9089b7fe478b8671e8b86a2acb677bf5fa47bf9a07d90142d51b4d2c7da2b8d7309c138ccbc75b18a019aa8d56
+  checksum: 5dfef9a91541ccb72d1f933cdf4e3bd85c06a614575f8324c9ec2b8e4c7592f5b5ff37220203f8eee8cb6460e1bbfd161281e60cabf345bf9db95b8ba3e0a12e
   languageName: node
   linkType: hard
 
@@ -8440,9 +8456,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe-legacy-api@npm:5.1.4":
-  version: 5.1.4
-  resolution: "testcafe-legacy-api@npm:5.1.4"
+"testcafe-legacy-api@npm:5.1.6":
+  version: 5.1.6
+  resolution: "testcafe-legacy-api@npm:5.1.6"
   dependencies:
     async: 3.2.3
     dedent: ^0.6.0
@@ -8458,16 +8474,16 @@ __metadata:
     read-file-relative: ^1.2.0
     strip-bom: ^2.0.0
     testcafe-hammerhead: ">=19.4.0"
-  checksum: f2d85545979e8bc8973a302d3ffbdbb868e43a9b03631ac1766767193d9e4ca9f13a850af130bbf1a3a29d2d58fbd6069829116fad4bf5b329ec5d1249ace0e8
+  checksum: b0cb316bf13c53e2b0b411eb6a313fd4a3f8222f8fdfe3aec717b0d0d2cd30ce46a4cdc20b819c987e2fdc11c389e13032518b6f63b1613f8b1b12d387778148
   languageName: node
   linkType: hard
 
-"testcafe-reporter-dashboard@npm:1.0.0-rc.3":
-  version: 1.0.0-rc.3
-  resolution: "testcafe-reporter-dashboard@npm:1.0.0-rc.3"
+"testcafe-reporter-dashboard@npm:^0.2.7":
+  version: 0.2.8
+  resolution: "testcafe-reporter-dashboard@npm:0.2.8"
   dependencies:
     es6-promise: ^4.2.8
-    fp-ts: ^2.12.1
+    fp-ts: ^2.9.5
     io-ts: ^2.2.14
     io-ts-types: ^0.5.15
     isomorphic-fetch: ^3.0.0
@@ -8475,8 +8491,8 @@ __metadata:
     monocle-ts: ^2.3.5
     newtype-ts: ^0.3.4
     semver: ^5.6.0
-    uuid: 3.3.3
-  checksum: 42c0a1098013f2730dd60589aadfb137c4a08b93da2061854431b3e96e9ece3cee741b5c0ad4c7704fc18b3b89aec7c3fb7243f7f45a642b55abc27745833deb
+    uuid: ^9.0.0
+  checksum: 405a668be07473400d8a5ab9a99994f7a810dfe102afbd043610475f3bd7296d37dd7d5f4d44b53447d38cbd6313317a6a5bb362bfa1c6dfb56f4d2ed2bafdb9
   languageName: node
   linkType: hard
 
@@ -8522,9 +8538,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe@npm:1.20.0":
-  version: 1.20.0
-  resolution: "testcafe@npm:1.20.0"
+"testcafe@npm:2.1.0":
+  version: 2.1.0
+  resolution: "testcafe@npm:2.1.0"
   dependencies:
     "@babel/core": ^7.12.1
     "@babel/plugin-proposal-async-generator-functions": ^7.12.1
@@ -8571,12 +8587,14 @@ __metadata:
     globby: ^11.0.4
     graceful-fs: ^4.1.11
     graphlib: ^2.1.5
+    http-status-codes: ^2.2.0
     humanize-duration: ^3.25.0
     import-lazy: ^3.1.0
     indent-string: ^1.2.2
     is-ci: ^1.0.10
     is-docker: ^2.0.0
     is-glob: ^2.0.1
+    is-podman: ^1.0.1
     is-stream: ^2.0.0
     json5: ^2.1.0
     lodash: ^4.17.13
@@ -8605,9 +8623,9 @@ __metadata:
     source-map-support: ^0.5.16
     strip-bom: ^2.0.0
     testcafe-browser-tools: 2.0.23
-    testcafe-hammerhead: 24.5.24
-    testcafe-legacy-api: 5.1.4
-    testcafe-reporter-dashboard: 1.0.0-rc.3
+    testcafe-hammerhead: 28.1.0
+    testcafe-legacy-api: 5.1.6
+    testcafe-reporter-dashboard: ^0.2.7
     testcafe-reporter-json: ^2.1.0
     testcafe-reporter-list: ^2.1.0
     testcafe-reporter-minimal: ^2.1.0
@@ -8617,11 +8635,11 @@ __metadata:
     time-limit-promise: ^1.0.2
     tmp: 0.0.28
     tree-kill: ^1.2.2
-    typescript: ^3.3.3
+    typescript: 4.7.4
     unquote: ^1.1.1
   bin:
     testcafe: bin/testcafe-with-v8-flag-filter.js
-  checksum: e6f6b2a97901764781cc33a76036af89852105cad6cdc10fe0706c8195b6a91456538f7b65fadac390d4f927a2aa7378e2951c31c43e335931ec203f862a0bd0
+  checksum: 8d426e4912fa8b2b873fbffc85c25ff90e530f7b741c11888f65df32164f9ecf0cb08c2f373e9837be4217eee442b72d38fb83fe45622436347d3096dd65c157
   languageName: node
   linkType: hard
 
@@ -8912,13 +8930,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^3.3.3":
-  version: 3.9.10
-  resolution: "typescript@npm:3.9.10"
+"typescript@npm:4.7.4":
+  version: 4.7.4
+  resolution: "typescript@npm:4.7.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 46c842e2cd4797b88b66ef06c9c41dd21da48b95787072ccf39d5f2aa3124361bc4c966aa1c7f709fae0509614d76751455b5231b12dbb72eb97a31369e1ff92
+  checksum: 5750181b1cd7e6482c4195825547e70f944114fb47e58e4aa7553e62f11b3f3173766aef9c281783edfd881f7b8299cf35e3ca8caebe73d8464528c907a164df
   languageName: node
   linkType: hard
 
@@ -8932,13 +8950,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^3.3.3#~builtin<compat/typescript>":
-  version: 3.9.10
-  resolution: "typescript@patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=7ad353"
+"typescript@patch:typescript@4.7.4#~builtin<compat/typescript>":
+  version: 4.7.4
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: dc7141ab555b23a8650a6787f98845fc11692063d02b75ff49433091b3af2fe3d773650dea18389d7c21f47d620fb3b110ea363dab4ab039417a6ccbbaf96fc2
+  checksum: 9096d8f6c16cb80ef3bf96fcbbd055bf1c4a43bd14f3b7be45a9fbe7ada46ec977f604d5feed3263b4f2aa7d4c7477ce5f9cd87de0d6feedec69a983f3a4f93e
   languageName: node
   linkType: hard
 
@@ -9091,21 +9109,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:3.3.3":
-  version: 3.3.3
-  resolution: "uuid@npm:3.3.3"
-  bin:
-    uuid: ./bin/uuid
-  checksum: 21133d0e8a85e607f59a66913bf4f1dd79bdc4a80979a872b913f7ec75f530255edfe8bc6b69ce32017b8367f0d60a8b24ccd2af99156dc1ef2b8b9fe0ec8065
-  languageName: node
-  linkType: hard
-
 "uuid@npm:8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
     uuid: dist/bin/uuid
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
   languageName: node
   linkType: hard
 

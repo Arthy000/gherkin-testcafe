@@ -1,5 +1,5 @@
 import { Given, When, Then, Before } from '@cucumber/cucumber';
-import { ClientFunction, Selector as NativeSelector } from 'testcafe';
+import { Selector as NativeSelector } from 'testcafe';
 
 const Selector = (input, t) => {
   return NativeSelector(input).with({ boundTestRun: t });
@@ -9,15 +9,15 @@ const Selector = (input, t) => {
 // except the full path which might be even more unstable
 const privacyModale = '#xe7COe';
 
-Before('@googleHook', async () => {
-  console.log('\nBackground step: Running Google e2e test.\n');
+Before('@googleHook', async (t: TestController) => {
+  t.ctx.hookValue = 'GitHub';
 });
 
-Given("I opened Google's search page", async (t) => {
+Given("I opened Google's search page", async (t: TestController) => {
   await t.navigateTo('https://www.google.com');
 });
 
-Given(/^I dismissed the privacy statement when it appeared$/, async (t) => {
+Given(/^I dismissed the privacy statement when it appeared$/, async (t: TestController) => {
   const elem = Selector(privacyModale, t);
   const acceptButton = Selector('#L2AGLb > div', t);
   await t.expect(elem.exists).ok('The privacy statement should be displayed', { timeout: 5000 }).click(acceptButton);
@@ -26,25 +26,43 @@ Given(/^I dismissed the privacy statement when it appeared$/, async (t) => {
   // await removeElement(t, privacyModale);
 });
 
-When(/^I type my search request "(.+)" on Google$/, async (t, [searchRequest]) => {
+// reusing logic example
+const searchOnGoogle = async (t: TestController, search?: string) => {
   const input = Selector('[name="q"]', t);
+  const searchKeyword = search || t.ctx.hookValue;
 
-  await t.typeText(input, searchRequest);
+  await t
+    .expect(searchKeyword)
+    .ok()
+    .typeText(input, search || t.ctx.hookValue);
+};
+
+When(/^I type my search request "(.+)" on Google$/, async (t: TestController, [searchRequest]: string[]) => {
+  await searchOnGoogle(t, searchRequest);
 });
 
-When(/^I press the "(.+)" key$/, async (t, [key]) => {
+When(/^I type my search request on Google$/, async (t: TestController) => {
+  await searchOnGoogle(t);
+});
+
+When(/^I press the "(.+)" key$/, async (t: TestController, [key]: string[]) => {
   await t.pressKey(key);
 });
 
-Then(/^I should see that the first Google's result is "(.+)"$/, async (t, [expectedSearchResult]) => {
+const expectGoogleResult = async (t: TestController, result?: string) => {
   const firstLink = Selector('#rso', t).find('a');
+  const searchResult = result || t.ctx.hookValue;
 
-  await t.expect(firstLink.innerText).contains(expectedSearchResult);
+  await t.expect(searchResult).ok().expect(firstLink.innerText).contains(searchResult);
+};
+
+Then(
+  /^I should see that the first Google's result is "(.+)"$/,
+  async (t: TestController, [expectedSearchResult]: string[]) => {
+    await expectGoogleResult(t, expectedSearchResult);
+  }
+);
+
+Then(/^I should see that the first Google's result is as expected$/, async (t: TestController) => {
+  await expectGoogleResult(t);
 });
-
-async function removeElement(t, elementSelector) {
-  await ClientFunction((elementSelector) => {
-    const element = document.querySelector(elementSelector);
-    element.parentNode.removeChild(element);
-  }).with(t)(elementSelector);
-}
