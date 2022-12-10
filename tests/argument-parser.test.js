@@ -33,16 +33,16 @@ describe('CLI Argument Parser', () => {
 
   describe('gherkin-testcafe -v should output GTC version instead of TC version', () => {
     test('Run gherkin-testcafe in CLI', (done) => {
-      const testAppFilePath = path.join(__dirname, '..', 'src', 'cli.js');
-      const testApp = spawn('node', [testAppFilePath, '-v']);
+      const cliPath = path.join(__dirname, '..', 'src', 'cli.js');
+      const cliProcess = spawn('node', [cliPath, '-v']);
 
       const currentVersion = require(`../package.json`).version;
 
-      testApp.stdout.on('data', (data) => {
+      cliProcess.stdout.on('data', (data) => {
         const output = data?.toString().replace(/(\r\n|\n|\r)/gm, '');
         expect(output).toBe(currentVersion);
       });
-      testApp.stdout.on('close', () => {
+      cliProcess.stdout.on('close', () => {
         done();
       });
     });
