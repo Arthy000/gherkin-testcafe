@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "typescript": {
+      "options": { "types": ["./index"] }
+    }
+  }
+}

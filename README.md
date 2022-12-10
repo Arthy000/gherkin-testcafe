@@ -9,22 +9,22 @@
 3. [Upgrading from previous version](#upgrading-from-version-1x)
 4. [CLI Usage](#cli-usage)
 5. [Programming interface](#programming-interface)
-    1. [Special Cases](#special-cases)
-        1. [Metadata](#metadata)
-        2. [Basic HTTP Authentication](#basic-http-authentication)
+   1. [Special Cases](#special-cases)
+      1. [Metadata](#metadata)
+      2. [Basic HTTP Authentication](#basic-http-authentication)
 6. [Writing step definitions](#writing-step-definitions)
 7. [Supported gherkin features and limitations](#supported-gherkin-features-and-limitations)
-    1. [Tags](#tags)
-    2. [Cucumber Expressions](#cucumber-expressions)
-    3. [Hooks](#hooks)
-        1. [Before and After](#before-and-after)
-        2. [BeforeAll and AfterAll](#beforeall-and-afterall)
-    4. [Data tables](#data-tables)
-    5. [Step reporting](#step-reporting)
+   1. [Tags](#tags)
+   2. [Cucumber Expressions](#cucumber-expressions)
+   3. [Hooks](#hooks)
+      1. [Before and After](#before-and-after)
+      2. [BeforeAll and AfterAll](#beforeall-and-afterall)
+   4. [Data tables](#data-tables)
+   5. [Step reporting](#step-reporting)
 8. [Using typescript and ESnext features](#using-typescript-and-esnext-features)
 9. [Contributing](#contributing)
-    1. [Commits](#commits)
-    2. [Releases](#releases)
+   1. [Commits](#commits)
+   2. [Releases](#releases)
 
 ## What it does
 
@@ -46,86 +46,65 @@ or
 You may also install `gherkin-testcafe` globally in order to be able to use the
 CLI without `npx`.
 
+TestCafé is a peer dependency of this package. There is no need to publish a new version of this package everytime a new version of TC is released, but this does mean there is a risk of compatibility issues. To make sure you are using compatible versions, please refer to this (new and incomplete) [compatibility matrix](./version-matrix.md)
+
 <sup>1</sup> This package internally uses [Cucumber.js](https://github.com/cucumber/cucumber-js) to parse step definitions.
 You will need it to define steps (see [Writing step definitions](#writing-step-definitions)).
-
-## Upgrading from version 1.x
-
-With TestCafé version 2.0, this package has introduced some breaking changes to it's API.
-These changes help this package be more future-proof in terms of upcoming features.
-
-When upgrading from version 1 to version 2, keep in mind that the following things have changed:
-
-* CLI interface is now passed through from TestCafé itself. So some options have changed:
-  * `--specs`, `--steps`, `-s` and `-d` option no longer exist. Please define all the files as regular test files.
-    Also note, that all feature files must have the `.feature` file extension.
-  * `-b` option is now a shorthand for `--list-browsers` (as it is in the regular TestCafé CLI). 
-    Define browsers like you would with TestCafé.
-    See also [CLI usage](#cli-usage).
-* Step parameters are now passed to the step implementation as an array.
-  Code needs to be refactored in the following way:
-  ```diff
-  - Given(/some (.+) text (.+) with (.+) capturing (.+) groups/, async (t, param1, param2, param 3, param 4) => {});
-  + Given(/some (.+) text (.+) with (.+) capturing (.+) groups/, async (t, [param1, param2, param 3, param 4]) => {});
-  ```
-* BeforeAll and AfterAll hooks now run before/after a feature, not a scenario. See also [BeforeAll and AfterAll](#beforeall-and-afterall).
-* The same prohibition for multiple method calls as for testcafe@1.0.0 applies. See also [testcafe@1.0.0 release notes](https://github.com/DevExpress/testcafe/releases/tag/v1.0.0).
-* Legacy Docker support dropped
 
 ## CLI usage
 
 Use the `gherkin-testcafe` just like you use TestCafé's CLI. Just replace
-`testcafe` by `gherkin-testcafe` and load all JS and feature files:
+`testcafe` with `gherkin-testcafe` and load all JS and feature files:
 
     gherkin-testcafe firefox,IE tests/**/*.js tests/**/*.feature
-    
+
 Use `--help` command to see all options:
 
     gherkin-testcafe --help
-    
+
 All [TestCafé CLI options](https://devexpress.github.io/testcafe/documentation/using-testcafe/command-line-interface.html) are supported.
 
 Additionally, you can specify:
 
-* Tags to run (see [Tags](#tags)):
+- Tags to run (see [Tags](#tags)):
 
-    The `--tags` parameter can take a list of tags to filter scenarios in (or out)
-    of the test run.
+  The `--tags` parameter can take a list of tags to filter scenarios in (or out)
+  of the test run.
 
-    - Including tag:
+  - Including tag:
 
-            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG
+          gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG
 
-        _This runs all scenarios that have `@TAG`_
+    _This runs all scenarios that have `@TAG`_
 
-    - Excluding tag:
+  - Excluding tag:
 
-            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags ~@TAG
-            
-        _This runs all scenarios that don't have `@TAG`_
+          gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags ~@TAG
 
-    - List of tags:
+    _This runs all scenarios that don't have `@TAG`_
 
-            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,@TAG2
-        
-        _This runs all scenarios that have `@TAG1` **or** `@TAG2`_
+  - List of tags:
 
-            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,~@TAG2
-            
-        _This runs all scenarios that have `@TAG1` **and not** `@TAG2`_  
+          gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,@TAG2
 
-    - `and` operation:
+    _This runs all scenarios that have `@TAG1` **or** `@TAG2`_
 
-            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and @TAG2"
-            
-        _This runs all scenarios that have `@TAG1` **and** `@TAG2`_
+          gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags @TAG1,~@TAG2
 
-            gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and ~@TAG2, @TAG2 and ~@TAG1"
-            
-        _This runs all scenarios that have **either** `@TAG1` **or** `@TAG2`,
-        not both_ 
+    _This runs all scenarios that have `@TAG1` **and not** `@TAG2`_
 
-* Custom parameter types, (see [Cucumber Expressions](#cucumber-expressions))
+  - `and` operation:
+
+          gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and @TAG2"
+
+    _This runs all scenarios that have `@TAG1` **and** `@TAG2`_
+
+          gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --tags "@TAG1 and ~@TAG2, @TAG2 and ~@TAG1"
+
+    _This runs all scenarios that have **either** `@TAG1` **or** `@TAG2`,
+    not both_
+
+- Custom parameter types, (see [Cucumber Expressions](#cucumber-expressions))
 
         gherkin-testcafe firefox tests/**/*.js tests/**/*.feature --param-type-registry-file ./a-file-that-exports-a-parameter-type-registry.js
 
@@ -158,7 +137,7 @@ You can use all [other runner methods](https://devexpress.github.io/testcafe/doc
 
 ### Special cases
 
-Some features couldn't be implemented in the exact same way they work for regular TestCafé. This is mostly due to the fact that our compiler handles the [fixture](https://testcafe.io/documentation/402775/reference/test-api/global/fixture) and [test](https://testcafe.io/documentation/402774/reference/test-api/global/test) objects. This means that `fixture` and `test` methods are not available outside of the gherkin compiler.
+Some features couldn't be implemented in the exact same way they work for regular TestCafé. This is mostly due to the fact that our compiler handles the [fixture](https://testcafe.io/documentation/402775/reference/test-api/global/fixture) and [test](https://testcafe.io/documentation/402774/reference/test-api/global/test) objects internally. This means that `fixture` and `test` methods are not available outside of the gherkin compiler.
 
 #### Metadata
 
@@ -191,30 +170,33 @@ To write step definitions, import `Given`, `When` and/ or `Then` from `cucumber`
 import { Given, When, Then } from '@cucumber/cucumber';
 
 Given(/some precondition/, async (t) => {
-    // The first argument of Given, When and Then will be a regex that matches the step.
-    // The second argument is a function that takes TestCafé's test controller object as a parameter.
+  // The first argument of Given, When and Then will be a regex that matches the step.
+  // The second argument is a function that takes TestCafé's test controller object as a parameter.
 });
 
 When(/something (.+) happens/, async (t, params) => {
-    // Captured parameters in the step regex will be passed as the second argument to the test implementation.
-    // "When Something great happens" will call this function with `["great"]` as `params`.
+  // Captured parameters in the step regex will be passed as the second argument to the test implementation.
+  // "When Something great happens" will call this function with `["great"]` as `params`.
 });
 
 When(/something (.+) and (.+) happens/, async (t, [param1, param2]) => {
-    // You can use regular array destructuring to access params directly.
-    // "When Something great and awesome happens" will result in `"great"` as `param1` and `"awesome"` as `param2`.
+  // You can use regular array destructuring to access params directly.
+  // "When Something great and awesome happens" will result in `"great"` as `param1` and `"awesome"` as `param2`.
 });
 
 Then(/an assertion takes place/, async (t) => {
-    // Test code is the same as TestCafé's test function accepts.
-    await t.expect(true).ok();
+  // Test code is the same as TestCafé's test function accepts.
+  await t.expect(true).ok();
 });
 
-Then('use Cucumber Expressions to get {int}, {float}, {word}, {string}, etc', async (t, [intParam, floatParam, singleWordParam, stringParam]) => {
+Then(
+  'use Cucumber Expressions to get {int}, {float}, {word}, {string}, etc',
+  async (t, [intParam, floatParam, singleWordParam, stringParam]) => {
     // You can use "Cucumber Expressions" instead of regex to get the parameters in the desired types.
     // It's also possible to add custom parameter types if needed.
     await t.expect(typeof intParam).eql('number');
-});
+  }
+);
 ```
 
 <sup>2</sup> You need to install [Cucumber.js](https://github.com/cucumber/cucumber-js) as a dependency (see [Installation](#installation)).
@@ -224,7 +206,7 @@ You can define
 
 ```js
 Given(/some step/, async (t) => {
-    // Test code
+  // Test code
 });
 ```
 
@@ -243,7 +225,7 @@ Most notable features are:
 
 - Features (Gherkin `feature` keyword): Will be transformed into a [TestCafé fixture](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#fixtures).
 - Scenarios (Gherkin `scenario` keyword): Will be transformed into a [TestCafé test](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#tests).
-- Backgrounds (Gherkin `background` keyword): Background steps are prepended to Scenario/ Scenario outline steps. `Before` hooks are run before background steps. 
+- Backgrounds (Gherkin `background` keyword): Background steps are prepended to Scenario/ Scenario outline steps. `Before` hooks are run before background steps.
 - Scenario outlines (Gherkin `Scenario Outline` and `Examples` keywords): Will transform every example into on [TestCafé test](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#tests).
 - Tags/ Hooks: See [Tags](#tags) and [Hooks](#hooks).
 - [Cucumber Expressions](#cucumber-expressions)
@@ -263,13 +245,13 @@ Examples:
     runner.tags(['~@TAG']) // Will run all scenarios that are not marked with @TAG
 
     runner.tags(['@TAG', '~@OTHER_TAG']) // Will run all scenarios that are marked with @TAG but not with @OTHER_TAG
-    
+
     runner.tags(['@TAG', '@OTHER_TAG']) // Will run all scenarios that are marked with @TAG or with @OTHER_TAG
-    
+
     runner.tags(['@TAG and @OTHERTAG']) // Will run all scenarios that are marked with @TAG and with @OTHER_TAG
 ```
 
-__Note:__ Do not set `--tags` CLI parameter when running tests through the programming interface as it is internally used to pass the selected tags to the gherkin compiler.
+**Note:** Do not set `--tags` CLI parameter when running tests through the programming interface as it is internally used to pass the selected tags to the gherkin compiler.
 
 ### Cucumber Expressions
 
@@ -279,50 +261,50 @@ It's also possible to add custom parameter types by creating a file that exports
 
 Example:
 
-1. Create a _ParameterTypeRegistry_ (e.g. _myCustomParamRegistry.js_):
+1.  Create a _ParameterTypeRegistry_ (e.g. _myCustomParamRegistry.js_):
 
     ```js
     import { ParameterTypeRegistry, ParameterType } from '@cucumber/cucumber-expressions';
 
     class Color {
-        constructor(name) {
-            this.name = `${name} color`;
-        }
+      constructor(name) {
+        this.name = `${name} color`;
+      }
     }
 
     const registry = new ParameterTypeRegistry();
 
     registry.defineParameterType(
-        new ParameterType(
-            'color', // name of the parameter
-            /red|blue|yellow/, // regexp used to match
-            Color, // the parameter's type
-            name => new Color(name) // transformer function
-        )
+      new ParameterType(
+        'color', // name of the parameter
+        /red|blue|yellow/, // regexp used to match
+        Color, // the parameter's type
+        (name) => new Color(name) // transformer function
+      )
     );
 
     module.exports = registry;
     ```
 
-2. Use it in a step:
+2.  Use it in a step:
 
         When I am searching for the blue color on Google
 
-3. Retrieve the value in the step implementation:
+3.  Retrieve the value in the step implementation:
 
     ```js
     When('I am searching for the {color} color on Google', async (t, [color]) => {
-        console.log(color.name); // blue color
+      console.log(color.name); // blue color
     });
     ```
 
-4. Configure the _runner_ to use your custom _ParameterTypeRegistry_:
+4.  Configure the _runner_ to use your custom _ParameterTypeRegistry_:
 
     ```js
-    runner.parameterTypeRegistryFile('./myCustomParamRegistry.js')
+    runner.parameterTypeRegistryFile('./myCustomParamRegistry.js');
     ```
 
-    __Note:__ Do not set `--param-type-registry-file` CLI parameter when running tests through the programming interface as it is internally used to pass the path of the _ParameterTypeRegistry_ file to the gherkin compiler.
+    **Note:** Do not set `--param-type-registry-file` CLI parameter when running tests through the programming interface as it is internally used to pass the path of the _ParameterTypeRegistry_ file to the gherkin compiler.
 
 Please refer to the [examples directory](./examples), and the official [Cucumber Expressions](https://cucumber.io/docs/cucumber/cucumber-expressions/) documentation for more details.
 
@@ -344,8 +326,8 @@ Each hook implementation gets TestCafé's test controller object as a parameter.
 import { Before } from '@cucumber/cucumber';
 
 Before('@tag1', async (t) => {
-    // do something
-    // e.g. write to t.ctx or read from t.fixtureCtx
+  // do something
+  // e.g. write to t.ctx or read from t.fixtureCtx
 });
 ```
 
@@ -354,15 +336,15 @@ Untagged hooks are run before/ after each test.
 #### `BeforeAll` and `AfterAll`
 
 BeforeAll/AfterAll hooks run before or after each fixture (i.e. feature).
-Each hook implementation gets TestCafé's fixture context. 
+Each hook implementation gets TestCafé's fixture context.
 See [Sharing Variables Between Fixture Hooks and Test Code](https://devexpress.github.io/testcafe/documentation/test-api/test-code-structure.html#sharing-variables-between-fixture-hooks-and-test-code) documentation for more details.
 
 ```js
 import { BeforeAll } from '@cucumber/cucumber';
 
 BeforeAll(async (ctx, meta) => {
-    // do something with the context and/or the meta
-})
+  // do something with the context and/or the meta
+});
 ```
 
 ### Data tables
@@ -375,56 +357,51 @@ When steps have a data table, they are passed an object with methods that can be
 - without column headers
   - `raw`: returns the table as a 2-D array
   - `rowsHash`: returns an object where each row corresponds to an entry (first column is the key, second column is the value)
-  
+
 See the [examples directory](./examples) for an example.
 
 ### Step reporting
 
-By default, the reporter used by TestCafé is `spec`. 
+By default, the reporter used by TestCafé is `spec`.
 TestCafé has no reason to handle the concept of "step" because it's a notion that is specific to gherkin.
 
 To work around that:
-- The metadata of a `test` now contains the full list of steps that compose the `scenario` it's based on.
-In case of failure of a step, its index is also added to the metadata.
-- A custom reporter (`gtc-reporter-spec`) has been added to the project.
-It is automatically used instead of spec as the default reporter for `gherkin-testcafe`. 
-Note that `spec` remains usable by simply using the `reporter` option provided by TestCafé:
-    ```bash
-    gherkin-testcafe chrome ./tests/* --reporter spec
-    ```
-    If you use the API,
-    ```js
-    runner.reporter("spec")
-    ```
-- Custom internal reporters have also been created based on `list` and `minimal`. 
-The gtc reporters behave in exactly the same way as their TestCafé counterparts, except that the steps are part of the 
-output, with highlighing indicating which ones succeeded, which ones failed, and which ones didn't run.
-    ```diff
-    + ✓ Given some step that succeeded
-    - ✖ When some step that failed
-    # - Then some step that didn't run
-    ```
 
-    To use one of this package's internal reporters, use its name in the reporter option:
-    ```bash
-    gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-list
-    gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-minimal
-    gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-spec # unnecessary as it is the default behavior
-    ```
+- The metadata of a `test` now contains the full list of steps that compose the `scenario` it's based on.
+  In case of failure of a step, its index is also added to the metadata.
+- A custom reporter (`gtc-reporter-spec`) has been added to the project.
+  It is automatically used instead of spec as the default reporter for `gherkin-testcafe`.
+  Note that `spec` remains usable by simply using the `reporter` option provided by TestCafé:
+  `bash gherkin-testcafe chrome ./tests/* --reporter spec `
+  If you use the API,
+  `js runner.reporter("spec") `
+- Custom internal reporters have also been created based on `list` and `minimal`.
+  The gtc reporters behave in exactly the same way as their TestCafé counterparts, except that the steps are part of the
+  output, with highlighing indicating which ones succeeded, which ones failed, and which ones didn't run.
+  `diff + ✓ Given some step that succeeded - ✖ When some step that failed # - Then some step that didn't run `
+
+      To use one of this package's internal reporters, use its name in the reporter option:
+      ```bash
+      gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-list
+      gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-minimal
+      gherkin-testcafe chrome ./tests/* --reporter gtc-reporter-spec # unnecessary as it is the default behavior
+      ```
 
 Note that other official reporters could be adapted in the future.
+
 #### Implement / Adapt a custom reporter
 
-If you are using a [custom reporter](https://testcafe.io/documentation/402810/guides/extend-testcafe/reporter-plugin) 
+If you are using a [custom reporter](https://testcafe.io/documentation/402810/guides/extend-testcafe/reporter-plugin)
 and want to use or display the step information, all you need to do is access the metadata from your reporter's methods.
 
 Fortunately, accessing metadata is [built-in behavior](https://testcafe.io/documentation/402810/guides/extend-testcafe/reporter-plugin#implement-the-reporter) for normal TestCafé reporters:
 TestCafé will pass the metadata object to your test reporting function as the third argument.
 
-The properties that are dedicated to this feature are `steps` and `failIndex`. 
+The properties that are dedicated to this feature are `steps` and `failIndex`.
 Each step in the `steps` array has two properties: `type` and `text`.
 
 Representation:
+
 ```json
 {
     "failIndex": 2,
@@ -434,13 +411,14 @@ Representation:
         { "type": "Action", "keyword": "When", "text": "some step that failed"},
         { "type": "Action", "keyword": "And", "text": "some step that didn't run"},
         { "type": "Outcome", "keyword": "Then", "text": "some other step that didn't run"}
-    ] 
+    ]
 }
 ```
 
 Usage example:
+
 ```js
-const reportTestDone = function (name, testRunInfo, meta) { 
+const reportTestDone = function (name, testRunInfo, meta) {
     meta.steps.forEach((step, index) => {
         let color;
         let symbol;
@@ -471,7 +449,7 @@ In fact, it actually uses TestCafé's compilers to compile Typescript and ESNext
 
 Please refer to [TestCafé's Typescript support manual page](https://devexpress.github.io/testcafe/documentation/test-api/typescript-support.html) to see how you can customize compiler options and which compiler options are used by default.
 
-Please make sure __not__ to install `@types/cucumber`!
+Please make sure **not** to install `@types/cucumber`!
 `gherkin-testcafe` will provide types for the `cucumber` module.
 
 Unfortunately, you cannot define your custom parameter types registry file in Typescript or with ESnext features.
