@@ -41,6 +41,7 @@
     "custom-param-type-example": "node main.js chrome examples/google.ts ./examples/custom-param-type.* --param-type-registry-file ./examples/custom-param-type-registry.js",
     "http-auth-example": "node main.js chrome ./examples/http-authentication-example.*",
     "error-reporting-example": "node main.js chrome ./examples/error-reporting* ./examples/google.ts",
+    "hooks-example": "node main.js chrome ./examples/hooks*",
     "tags-1-example": "node main.js chrome ./examples/tags.* --tags @scenarioTag1",
     "tags-not1-example": "node main.js chrome ./examples/tags.* --tags ~@scenarioTag1",
     "tags-1or2-example": "node main.js chrome ./examples/tags.* --tags @scenarioTag1,@scenarioTag2",
