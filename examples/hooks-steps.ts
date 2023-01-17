@@ -5,9 +5,7 @@ import { AFTER_PREFIX, BEFORE_PREFIX, beforeTags, afterTags, bothTags } from './
 /* PREREQUISITES */
 
 Given(/a (BeforeAll|AfterAll) hook is defined/, async (t: TestController) => {
-  // TODO: try to find global hooks in t or testRun object
-  const tc = t as any;
-  console.log(tc.testRun.test.fixture.beforeFn.toString());
+  // NOTE: nothing to do here as there is no way to check for global hooks being implemented
 });
 
 Given(/the scenario has no tags/, async (t: TestController) => {

@@ -14,7 +14,6 @@ Feature: Hooks feature 1
         Given the scenario has a tag linked to a Before hook
         Then the linked Before hook should have run
 
-
     @beforetag1 @beforetag2
     Scenario: Several tags
         Given the scenario has several tags linked to Before hooks
