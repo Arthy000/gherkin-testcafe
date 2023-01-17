@@ -10,8 +10,10 @@
 4. [CLI Usage](#cli-usage)
 5. [Programming interface](#programming-interface)
    1. [Special Cases](#special-cases)
-      1. [Metadata](#metadata)
-      2. [Basic HTTP Authentication](#basic-http-authentication)
+      1. [Fixture and test name](#fixture-and-test-name)
+      2. [Metadata](#metadata)
+      3. [Fixture context](#fixture-context)
+      4. [Basic HTTP Authentication](#basic-http-authentication)
 6. [Writing step definitions](#writing-step-definitions)
 7. [Supported gherkin features and limitations](#supported-gherkin-features-and-limitations)
    1. [Tags](#tags)
@@ -139,13 +141,46 @@ You can use all [other runner methods](https://devexpress.github.io/testcafe/doc
 
 Some features couldn't be implemented in the exact same way they work for regular TestCafé. This is mostly due to the fact that our compiler handles the [fixture](https://testcafe.io/documentation/402775/reference/test-api/global/fixture) and [test](https://testcafe.io/documentation/402774/reference/test-api/global/test) objects internally. This means that `fixture` and `test` methods are not available outside of the gherkin compiler.
 
+#### Fixture and test name
+
+Fixture and test name can be accessed from the tests through the `testRun` property of the TestController object.
+
+```ts
+Given(/some step/, async (t: TestController) => {
+  const { name: testName, fixture } = t.testRun.test;
+  const { name: fixtureName } = fixture;
+});
+```
+
 #### Metadata
 
 The [fixture.meta()](https://testcafe.io/documentation/402780/reference/test-api/fixture/meta) and [test.meta()](https://testcafe.io/documentation/402734/reference/test-api/test/meta) methods cannot be used directly. Instead, the compiler will automatically add the name of the feature and the tags attached to it in the fixture metadata. The test metadata will only contain the attached tags.
 
-At the moment, these are the only pieces of data that can be used by either. More could be added in the future, provided there are requests to do so.
+The fixture metadata is accessible from within the `beforeAll` and `afterAll` [hooks](#beforeall-and-afterall).
 
-In turn, the metadata is accessible from within the test through the `beforeAll` and `afterAll` [hooks](#beforeall-and-afterall).
+The test and fixture metadata can be accessed from the tests through the `testRun` property of the TestController object.
+
+```ts
+Given(/some step/, async (t: TestController) => {
+  const testMeta = t.testRun.test.meta;
+  const fixtureMeta = t.testRun.test.fixture.meta;
+});
+```
+
+#### Fixture context
+
+The fixture context can be accessed from the tests through the `testRun` property of the TestController object.
+
+```ts
+Given(/some step/, async (t: TestController) => {
+  const { fixtureCtx } = t.testRun;
+});
+```
+
+It is best practice to avoid sharing data between tests, so the fixture context **should only ever be read**.
+Writing into the fixtureCtx property of the test run is not forbidden, but should be avoided.
+
+The fixture context is also accessible from within the `beforeAll` and `afterAll` [hooks](#beforeall-and-afterall).
 
 #### Basic HTTP Authentication
 

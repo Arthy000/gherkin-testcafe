@@ -37,9 +37,10 @@ declare module 'gherkin-testcafe' {
       testRun: {
         test: {
           name: string;
-          meta: Record<string, any>;
+          meta: Record<string, string>;
           fixture: {
             name: string;
+            meta: Record<string, string>;
           };
         };
         /**
