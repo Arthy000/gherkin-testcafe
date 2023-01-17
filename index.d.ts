@@ -32,6 +32,23 @@ declare module 'gherkin-testcafe' {
         developmentMode?: boolean
       ): Promise<GherkinTestCafe>;
     }
+
+    interface TestController {
+      testRun: {
+        test: {
+          name: string;
+          meta: Record<string, any>;
+          fixture: {
+            name: string;
+          };
+        };
+        /**
+         * Shared between all the tests of a given feature - use carefully as sharing data between
+         * tests goes against the isolation principle
+         */
+        fixtureCtx: Record<string, any>;
+      };
+    }
   }
 
   const createTestCafe: GherkinTestCafeFactory;
