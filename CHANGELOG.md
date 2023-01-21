@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.6.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.5.1...v5.6.0) (2023-01-21)
+
+
+### Features
+
+* **documentation:** improve documentation and typing ([#115](https://github.com/Arthy000/gherkin-testcafe/issues/115)) ([6c39dbb](https://github.com/Arthy000/gherkin-testcafe/commit/6c39dbb6a9170ce7e9cb30556049ea1405e6792a))
+* **testcontroller:** add new properties to TestController typing ([#113](https://github.com/Arthy000/gherkin-testcafe/issues/113)) ([293dd77](https://github.com/Arthy000/gherkin-testcafe/commit/293dd7755f31f5ff8c89dcd55877a5341129df88))
+
 ### [5.5.2](https://github.com/Arthy000/gherkin-testcafe/compare/v5.5.1...v5.5.2) (2022-12-10)
 
 ### [5.5.1](https://github.com/Arthy000/gherkin-testcafe/compare/v5.5.0...v5.5.1) (2022-11-11)
