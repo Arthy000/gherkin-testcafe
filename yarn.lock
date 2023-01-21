@@ -4637,7 +4637,7 @@ __metadata:
     testcafe: 2.2.0
   peerDependencies:
     "@cucumber/cucumber": ^8.0.0
-    "@cucumber/cucumber-expressions": ^15.0.0
+    "@cucumber/cucumber-expressions": ^15.0.0 || ^16.0.0
     testcafe: ~1.20.0 || ^2.0.0 <= 2.2.0
   bin:
     gherkin-testcafe: ./main.js
