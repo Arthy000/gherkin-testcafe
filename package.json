@@ -52,7 +52,9 @@
     "gitcommit": "git-cz",
     "gitrecommit": "git-cz --retry",
     "gitamend": "git-cz --amend",
-    "release": "standard-version",
+    "update-matrix": "node ./tools/update-version-matrix.js",
+    "amend-matrix": "git add ./version-matrix.md ./tools/version-matrix.json && git commit --amend --no-edit",
+    "release": "standard-version && update-matrix && amend-matrix",
     "test": "jest"
   },
   "dependencies": {
