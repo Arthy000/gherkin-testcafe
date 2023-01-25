@@ -32,8 +32,7 @@
 
 [TestCafé](https://devexpress.github.io/testcafe/) is a tool for automating end-to-end tests for websites.
 This package provides a compatibility layer so that BDD-style tests can be run with TestCafé using the [Gherkin syntax](https://docs.cucumber.io/gherkin/).
-Please note that [there seems to be a plan](https://github.com/DevExpress/testcafe/issues/1373#issuecomment-291526857) to officially support Gherkin syntax in TestCafé.
-Once official support has been established, this package will be abandoned.
+Please note that [there was a plan](https://github.com/DevExpress/testcafe/issues/1373#issuecomment-291526857) to officially support Gherkin syntax in TestCafé. However it has been cancelled.
 
 ## Installation
 
