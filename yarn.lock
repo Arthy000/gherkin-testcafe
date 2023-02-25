@@ -1709,6 +1709,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@devexpress/bin-v8-flags-filter@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@devexpress/bin-v8-flags-filter@npm:1.3.0"
+  checksum: 7787f9ca8d9d9ae2c782460db2b0044d4a800c4da19f141dca11993077fe10f212a9eb8d1f2c6236031189d1216b638f79664343190d9ed588b887beeb88b8ba
+  languageName: node
+  linkType: hard
+
 "@devexpress/error-stack-parser@npm:^2.0.6":
   version: 2.0.6
   resolution: "@devexpress/error-stack-parser@npm:2.0.6"
@@ -2745,16 +2752,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-module-resolver@npm:^4.0.0":
-  version: 4.1.0
-  resolution: "babel-plugin-module-resolver@npm:4.1.0"
+"babel-plugin-module-resolver@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "babel-plugin-module-resolver@npm:5.0.0"
   dependencies:
-    find-babel-config: ^1.2.0
-    glob: ^7.1.6
+    find-babel-config: ^2.0.0
+    glob: ^8.0.3
     pkg-up: ^3.1.0
-    reselect: ^4.0.0
-    resolve: ^1.13.1
-  checksum: 3907fba21ca3c66a081e01fbd16bb09c84781749db16aa57805becc376bb5ee8dc373d4b209613e1453d30ea6c836d13073e9e7b6d239ff1806dd1763a9ab18f
+    reselect: ^4.1.7
+    resolve: ^1.22.1
+  checksum: d6880e49fc8e7bac509a2c183b4303ee054a47a80032a59a6f7844bb468ebe5e333b5dc5378443afdab5839e2da2b31a6c8d9a985a0047cd076b82bb9161cc78
   languageName: node
   linkType: hard
 
@@ -2846,13 +2853,6 @@ __metadata:
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
   checksum: 669632eb3745404c2f822a18fc3a0122d2f9a7a13f7fb8b5823ee19d1d2ff9ee5b52c53367176ea4ad093c332fd5ab4bd0ebae5a8e27917a4105a4cfc86b1005
-  languageName: node
-  linkType: hard
-
-"bin-v8-flags-filter@npm:^1.1.2":
-  version: 1.2.0
-  resolution: "bin-v8-flags-filter@npm:1.2.0"
-  checksum: 73a3130c818203d96d40b9a5c438e37bc1f6deb93b723fd2cc0ed7064ae028925ef5c8219122ead4707079e78285013aab4c79f60d3f15c4338bc7c385c7c0ec
   languageName: node
   linkType: hard
 
@@ -4177,6 +4177,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esotope-hammerhead@npm:0.6.3":
+  version: 0.6.3
+  resolution: "esotope-hammerhead@npm:0.6.3"
+  dependencies:
+    "@types/estree": 0.0.46
+  checksum: 97e2b37482f139fc5a9f836cd4d57f91dbfc32c9471c26b7fe813bbf2641f89c5702c900d9ecf81baa086888686e9ba73a97f6f396694fd174f67eca7d55d16e
+  languageName: node
+  linkType: hard
+
 "esprima@npm:^4.0.0":
   version: 4.0.1
   resolution: "esprima@npm:4.0.1"
@@ -4356,13 +4365,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-babel-config@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "find-babel-config@npm:1.2.0"
+"find-babel-config@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "find-babel-config@npm:2.0.0"
   dependencies:
-    json5: ^0.5.1
-    path-exists: ^3.0.0
-  checksum: 0a1785d3da9f38637885d9d65f183aaa072f51a834f733035e9694e4d0f6983ae8c8e75cd4e08b92af6f595b3b490ee813a1c5a9b14740685aa836fa1e878583
+    json5: ^2.1.1
+    path-exists: ^4.0.0
+  checksum: d110308b02fe6a6411a0cfb7fd50af6740fbf5093eada3d6ddacf99b07fc8eea4aa3475356484710a0032433029a21ce733bb3ef88fda1d6e35c29a3e4983014
   languageName: node
   linkType: hard
 
@@ -4634,11 +4643,11 @@ __metadata:
     jest: ^29.3.1
     prettier: ^2.8.3
     standard-version: ^9.5.0
-    testcafe: 2.2.0
+    testcafe: 2.3.1
   peerDependencies:
     "@cucumber/cucumber": ^8.0.0
     "@cucumber/cucumber-expressions": ^15.0.0 || ^16.0.0
-    testcafe: ~1.20.0 || ^2.0.0 <= 2.2.0
+    testcafe: ~1.20.0 || ^2.0.0 <= 2.3.1
   bin:
     gherkin-testcafe: ./main.js
   languageName: unknown
@@ -4723,6 +4732,19 @@ __metadata:
     minimatch: ^5.0.1
     once: ^1.3.0
   checksum: 50bcdea19d8e79d8de5f460b1939ffc2b3299eac28deb502093fdca22a78efebc03e66bf54f0abc3d3d07d8134d19a32850288b7440d77e072aa55f9d33b18c5
+  languageName: node
+  linkType: hard
+
+"glob@npm:^8.0.3":
+  version: 8.1.0
+  resolution: "glob@npm:8.1.0"
+  dependencies:
+    fs.realpath: ^1.0.0
+    inflight: ^1.0.4
+    inherits: 2
+    minimatch: ^5.0.1
+    once: ^1.3.0
+  checksum: 92fbea3221a7d12075f26f0227abac435de868dd0736a17170663783296d0dd8d3d532a5672b4488a439bf5d7fb85cdd07c11185d6cd39184f0385cbdfb86a47
   languageName: node
   linkType: hard
 
@@ -6038,16 +6060,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "json5@npm:0.5.1"
+"json5@npm:^2.1.1, json5@npm:^2.2.2":
+  version: 2.2.3
+  resolution: "json5@npm:2.2.3"
   bin:
     json5: lib/cli.js
-  checksum: 9b85bf06955b23eaa4b7328aa8892e3887e81ca731dd27af04a5f5f1458fbc5e1de57a24442e3272f8a888dd1abe1cb68eb693324035f6b3aeba4fcab7667d62
+  checksum: 2a7436a93393830bce797d4626275152e37e877b265e94ca69c99e3d20c2b9dab021279146a39cdb700e71b2dd32a4cebd1514cd57cee102b1af906ce5040349
   languageName: node
   linkType: hard
 
-"json5@npm:^2.1.0, json5@npm:^2.2.1":
+"json5@npm:^2.2.1":
   version: 2.2.1
   resolution: "json5@npm:2.2.1"
   bin:
@@ -7635,10 +7657,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"reselect@npm:^4.0.0":
-  version: 4.1.6
-  resolution: "reselect@npm:4.1.6"
-  checksum: 3ea1058422904063ec93c8f4693fe33dcb2178bbf417ace8db5b2c797a5875cf357d9308d11ed3942ee22507dd34ecfbf1f3a21340a4f31c206cab1d36ceef31
+"reselect@npm:^4.1.7":
+  version: 4.1.7
+  resolution: "reselect@npm:4.1.7"
+  checksum: 738d8e2b8f0dca154ad29de6a209c9fbca2d70ae6788fd85df87f2c74b95a65bbf2d16d43a9e2faff39de34d17a29d706ba08a6b2ee5660c09589edbd19af7e1
   languageName: node
   linkType: hard
 
@@ -7723,7 +7745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.10.0, resolve@npm:^1.13.1, resolve@npm:^1.14.2, resolve@npm:^1.20.0":
+"resolve@npm:^1.10.0, resolve@npm:^1.14.2, resolve@npm:^1.20.0, resolve@npm:^1.22.1":
   version: 1.22.1
   resolution: "resolve@npm:1.22.1"
   dependencies:
@@ -7736,7 +7758,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.13.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>":
+"resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>":
   version: 1.22.1
   resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
   dependencies:
@@ -8341,9 +8363,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe-hammerhead@npm:28.2.5":
-  version: 28.2.5
-  resolution: "testcafe-hammerhead@npm:28.2.5"
+"testcafe-hammerhead@npm:28.4.2":
+  version: 28.4.2
+  resolution: "testcafe-hammerhead@npm:28.4.2"
   dependencies:
     acorn-hammerhead: 0.6.1
     asar: ^2.0.1
@@ -8351,7 +8373,7 @@ __metadata:
     crypto-md5: ^1.0.0
     css: 2.2.3
     debug: 4.3.1
-    esotope-hammerhead: 0.6.2
+    esotope-hammerhead: 0.6.3
     http-cache-semantics: ^4.1.0
     iconv-lite: 0.5.1
     lodash: ^4.17.20
@@ -8369,7 +8391,7 @@ __metadata:
     tough-cookie: 4.0.0
     tunnel-agent: 0.6.0
     webauth: ^1.1.0
-  checksum: 3ba0b64f5049b5e45b6cb32e5d55880d02b25703e219808c200364aa83b1bdcf0edd7ad058bf39e0ca81e602e552a28bd70fe6e60eca1ac7a28f08ef1af0df98
+  checksum: 3b7e236726b58a99c025187c0edeac38ed8814f129d0de2b4da972ec8f46ac064540b51636c86e342056d6d144c214666f376680dddf7920076098dd72853b08
   languageName: node
   linkType: hard
 
@@ -8487,9 +8509,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe@npm:2.2.0":
-  version: 2.2.0
-  resolution: "testcafe@npm:2.2.0"
+"testcafe@npm:2.3.1":
+  version: 2.3.1
+  resolution: "testcafe@npm:2.3.1"
   dependencies:
     "@babel/core": ^7.12.1
     "@babel/plugin-proposal-async-generator-functions": ^7.12.1
@@ -8507,12 +8529,12 @@ __metadata:
     "@babel/preset-flow": ^7.12.1
     "@babel/preset-react": ^7.12.1
     "@babel/runtime": ^7.12.5
+    "@devexpress/bin-v8-flags-filter": ^1.3.0
     "@miherlosev/esm": 3.2.26
     "@types/node": ^12.20.10
     async-exit-hook: ^1.1.2
-    babel-plugin-module-resolver: ^4.0.0
+    babel-plugin-module-resolver: ^5.0.0
     babel-plugin-syntax-trailing-function-commas: ^6.22.0
-    bin-v8-flags-filter: ^1.1.2
     bowser: ^2.8.1
     callsite: ^1.0.0
     callsite-record: ^4.0.0
@@ -8545,7 +8567,7 @@ __metadata:
     is-glob: ^2.0.1
     is-podman: ^1.0.1
     is-stream: ^2.0.0
-    json5: ^2.1.0
+    json5: ^2.2.2
     lodash: ^4.17.13
     log-update-async-hook: ^2.0.7
     make-dir: ^3.0.0
@@ -8572,7 +8594,7 @@ __metadata:
     source-map-support: ^0.5.16
     strip-bom: ^2.0.0
     testcafe-browser-tools: 2.0.23
-    testcafe-hammerhead: 28.2.5
+    testcafe-hammerhead: 28.4.2
     testcafe-legacy-api: 5.1.6
     testcafe-reporter-dashboard: ^0.2.10
     testcafe-reporter-json: ^2.1.0
@@ -8586,9 +8608,10 @@ __metadata:
     tree-kill: ^1.2.2
     typescript: 4.7.4
     unquote: ^1.1.1
+    url-to-options: ^2.0.0
   bin:
     testcafe: bin/testcafe-with-v8-flag-filter.js
-  checksum: d35b77d8695b3dbcbae64260e3315f319c99bd561c426b78d1e80df509a9f4192ea6b13f27a93501f47a872ce3b11deb6f052005705f4a28024fb91a40a04bf0
+  checksum: 1b64a4bf349fcfb4b7b86bc55fc3ba596d4cab391267db12ad90764dbd7886aa3aba4ce5a08cb5258677c4902a5e57f79aca520fc27096e5b51703ace50598a8
   languageName: node
   linkType: hard
 
@@ -9020,6 +9043,13 @@ __metadata:
   version: 0.1.0
   resolution: "urix@npm:0.1.0"
   checksum: 4c076ecfbf3411e888547fe844e52378ab5ada2d2f27625139011eada79925e77f7fbf0e4016d45e6a9e9adb6b7e64981bd49b22700c7c401c5fc15f423303b3
+  languageName: node
+  linkType: hard
+
+"url-to-options@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "url-to-options@npm:2.0.0"
+  checksum: 104741b13c2a1388bbd6a488fa99f70535931cb9a81a8aa039037fa5264174e2cdc9eae6b99442f7314003cea6205a6769766febc4893c9ac93d409ee356d885
   languageName: node
   linkType: hard
 
