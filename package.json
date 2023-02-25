@@ -52,7 +52,7 @@
     "gitcommit": "git-cz",
     "gitrecommit": "git-cz --retry",
     "gitamend": "git-cz --amend",
-    "release": "standard-version",
+    "release": "standard-version --commit-all",
     "test": "jest"
   },
   "dependencies": {
@@ -84,7 +84,7 @@
   },
   "standard-version": {
     "scripts": {
-      "postbump": "node ./tools/update-version-matrix.js"
+      "postbump": "node ./tools/update-version-matrix.js && git add version-matrix.md tools/version-matrix.json"
     }
   },
   "packageManager": "yarn@3.2.1"
