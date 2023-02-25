@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.5.1...v6.0.0) (2023-02-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Risk of failure if cucumber and cucumber-expressions are not properly installed in
+the user's project
+
+### Features
+
+* **deps:** update testcafe compatibility ([#123](https://github.com/Arthy000/gherkin-testcafe/issues/123)) ([cd650e9](https://github.com/Arthy000/gherkin-testcafe/commit/cd650e9c368acc1264fdf437ba62c85975c32fb4))
+* **deps:** upgrade dependencies ([#124](https://github.com/Arthy000/gherkin-testcafe/issues/124)) ([84ec0a6](https://github.com/Arthy000/gherkin-testcafe/commit/84ec0a67e2fbcf3f12b352cfc06e6c72101e01f6))
+* **documentation:** improve documentation and typing ([#115](https://github.com/Arthy000/gherkin-testcafe/issues/115)) ([6c39dbb](https://github.com/Arthy000/gherkin-testcafe/commit/6c39dbb6a9170ce7e9cb30556049ea1405e6792a))
+* **testcontroller:** add new properties to TestController typing ([#113](https://github.com/Arthy000/gherkin-testcafe/issues/113)) ([293dd77](https://github.com/Arthy000/gherkin-testcafe/commit/293dd7755f31f5ff8c89dcd55877a5341129df88))
+
 ## [5.6.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.5.1...v5.6.0) (2023-01-21)
 
 
