@@ -65,7 +65,7 @@
   "peerDependencies": {
     "@cucumber/cucumber": "^8.0.0",
     "@cucumber/cucumber-expressions": "^15.0.0 || ^16.0.0",
-    "testcafe": "~1.20.0 || ^2.0.0 <= 2.3.1"
+    "testcafe": "^2.0.0 <= 2.5.0"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^8.11.1",
@@ -75,7 +75,7 @@
     "jest": "^29.4.3",
     "prettier": "^2.8.4",
     "standard-version": "^9.5.0",
-    "testcafe": "2.3.1"
+    "testcafe": "2.5.0"
   },
   "config": {
     "commitizen": {

@@ -1712,6 +1712,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@electron/asar@npm:^3.2.3":
+  version: 3.2.4
+  resolution: "@electron/asar@npm:3.2.4"
+  dependencies:
+    chromium-pickle-js: ^0.2.0
+    commander: ^5.0.0
+    glob: ^7.1.6
+    minimatch: ^3.0.4
+  bin:
+    asar: bin/asar.js
+  checksum: 06e3e8fe7c894f7e7727410af5a9957ec77088f775b22441acf4ef718a9e6642a4dc1672f77ee1ce325fc367c8d59ac1e02f7db07869c8ced8a00132a3b54643
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -3129,15 +3143,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chrome-remote-interface@npm:^0.31.3":
-  version: 0.31.3
-  resolution: "chrome-remote-interface@npm:0.31.3"
+"chrome-remote-interface@npm:^0.32.1":
+  version: 0.32.2
+  resolution: "chrome-remote-interface@npm:0.32.2"
   dependencies:
     commander: 2.11.x
     ws: ^7.2.0
   bin:
     chrome-remote-interface: bin/client.js
-  checksum: 460db5d5aa3f8a8889780c2efe24a5516afacb8983e3ec090853fd9f4a6c1878b7470c7306724b01af596394f53c2bea8ed8176d88d6feee36d67f628fe4fff6
+  checksum: 8a9fab249675eb1301b50ed99258aba8a844c07b03b5b4481d395ed72086aab80a492da81108e191a95da82a5930464c9d3ea359f331de56cd75f8e303f3a120
   languageName: node
   linkType: hard
 
@@ -3327,6 +3341,13 @@ __metadata:
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: ab8c07884e42c3a8dbc5dd9592c606176c7eb5c1ca5ff274bcf907039b2c41de3626f684ea75ccf4d361ba004bbaff1f577d5384c155f3871e456bdf27becf9e
+  languageName: node
+  linkType: hard
+
+"commander@npm:^5.0.0":
+  version: 5.1.0
+  resolution: "commander@npm:5.1.0"
+  checksum: 0b7fec1712fbcc6230fcb161d8d73b4730fa91a21dc089515489402ad78810547683f058e2a9835929c212fead1d6a6ade70db28bbb03edbc2829a9ab7d69447
   languageName: node
   linkType: hard
 
@@ -3927,6 +3948,16 @@ __metadata:
   version: 1.1.2
   resolution: "depd@npm:1.1.2"
   checksum: 6b406620d269619852885ce15965272b829df6f409724415e0002c8632ab6a8c0a08ec1f0bd2add05dc7bd7507606f7e2cc034fa24224ab829580040b835ecd9
+  languageName: node
+  linkType: hard
+
+"des.js@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "des.js@npm:1.0.1"
+  dependencies:
+    inherits: ^2.0.1
+    minimalistic-assert: ^1.0.0
+  checksum: 1ec2eedd7ed6bd61dd5e0519fd4c96124e93bb22de8a9d211b02d63e5dd152824853d919bb2090f965cc0e3eb9c515950a9836b332020d810f9c71feb0fd7df4
   languageName: node
   linkType: hard
 
@@ -4623,11 +4654,11 @@ __metadata:
     jest: ^29.4.3
     prettier: ^2.8.4
     standard-version: ^9.5.0
-    testcafe: 2.3.1
+    testcafe: 2.5.0
   peerDependencies:
     "@cucumber/cucumber": ^8.0.0
     "@cucumber/cucumber-expressions": ^15.0.0 || ^16.0.0
-    testcafe: ~1.20.0 || ^2.0.0 <= 2.3.1
+    testcafe: ^2.0.0 <= 2.5.0
   bin:
     gherkin-testcafe: ./main.js
   languageName: unknown
@@ -4981,6 +5012,25 @@ __metadata:
   version: 2.2.0
   resolution: "http-status-codes@npm:2.2.0"
   checksum: 31e1d730856210445da0907d9b484629e69e4fe92ac032478a7aa4d89e5b215e2b4e75d7ebce40d0537b6850bd281b2f65c7cc36cc2677e5de056d6cea1045ce
+  languageName: node
+  linkType: hard
+
+"httpntlm@npm:^1.8.10":
+  version: 1.8.12
+  resolution: "httpntlm@npm:1.8.12"
+  dependencies:
+    des.js: ^1.0.1
+    httpreq: ">=0.4.22"
+    js-md4: ^0.3.2
+    underscore: ~1.12.1
+  checksum: 9cb75c2de9777b57a42f1ef83cbd33c7af2a543406a1fdd2875f64e48ccffd8a3579f3e2012b1791b60103f30a618fbb07a8007f305e274407cd4efa2ad0c399
+  languageName: node
+  linkType: hard
+
+"httpreq@npm:>=0.4.22":
+  version: 0.5.2
+  resolution: "httpreq@npm:0.5.2"
+  checksum: 6afdaa8a0a48d9c8b460aad44d9a12783eba0436bfeb8f196fd7b0366c0749458ed3d4568326b585e98a6a36a21b69b993c46261272304fe50eb8b964f93b013
   languageName: node
   linkType: hard
 
@@ -5991,6 +6041,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-md4@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "js-md4@npm:0.3.2"
+  checksum: aa7b7cbd738b105f86fc0fa50ce2a7a6b6b329ff3f713d1bd38b12c2a72929bab5a16e658a03830faa8d656356aa89b4f77f1fbf05ffa8d095bda6d831441c2d
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0":
   version: 3.0.2
   resolution: "js-tokens@npm:3.0.2"
@@ -6510,6 +6567,13 @@ __metadata:
   version: 1.0.1
   resolution: "min-indent@npm:1.0.1"
   checksum: bfc6dd03c5eaf623a4963ebd94d087f6f4bbbfd8c41329a7f09706b0cb66969c4ddd336abeb587bc44bc6f08e13bf90f0b374f9d71f9f01e04adc2cd6f083ef1
+  languageName: node
+  linkType: hard
+
+"minimalistic-assert@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "minimalistic-assert@npm:1.0.1"
+  checksum: cc7974a9268fbf130fb055aff76700d7e2d8be5f761fb5c60318d0ed010d839ab3661a533ad29a5d37653133385204c503bfac995aaa4236f4e847461ea32ba7
   languageName: node
   linkType: hard
 
@@ -7936,6 +8000,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"set-cookie-parser@npm:^2.5.1":
+  version: 2.6.0
+  resolution: "set-cookie-parser@npm:2.6.0"
+  checksum: bf11ebc594c53d84588f1b4c04f1b8ce14e0498b1c011b3d76b5c6d5aac481bbc3f7c5260ec4ce99bdc1d9aed19f9fc315e73166a36ca74d0f12349a73f6bdc9
+  languageName: node
+  linkType: hard
+
 "shebang-command@npm:^2.0.0":
   version: 2.0.0
   resolution: "shebang-command@npm:2.0.0"
@@ -8364,18 +8435,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe-hammerhead@npm:28.4.2":
-  version: 28.4.2
-  resolution: "testcafe-hammerhead@npm:28.4.2"
+"testcafe-hammerhead@npm:30.1.0":
+  version: 30.1.0
+  resolution: "testcafe-hammerhead@npm:30.1.0"
   dependencies:
+    "@electron/asar": ^3.2.3
     acorn-hammerhead: 0.6.1
-    asar: ^2.0.1
     bowser: 1.6.0
     crypto-md5: ^1.0.0
     css: 2.2.3
     debug: 4.3.1
     esotope-hammerhead: 0.6.3
     http-cache-semantics: ^4.1.0
+    httpntlm: ^1.8.10
     iconv-lite: 0.5.1
     lodash: ^4.17.20
     lru-cache: 2.6.3
@@ -8391,8 +8463,7 @@ __metadata:
     semver: 5.5.0
     tough-cookie: 4.0.0
     tunnel-agent: 0.6.0
-    webauth: ^1.1.0
-  checksum: 3b7e236726b58a99c025187c0edeac38ed8814f129d0de2b4da972ec8f46ac064540b51636c86e342056d6d144c214666f376680dddf7920076098dd72853b08
+  checksum: 49b1f9a7e5569e7a4d207010ba29c1d593eb314203199d04710b1e6b990929f75ec71177f136f9e3f4862e0b40bef6317d31b8a52091fd2adf4ccfc228c0f650
   languageName: node
   linkType: hard
 
@@ -8510,9 +8581,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe@npm:2.3.1":
-  version: 2.3.1
-  resolution: "testcafe@npm:2.3.1"
+"testcafe-selector-generator@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "testcafe-selector-generator@npm:0.1.0"
+  checksum: b5bbbe57739b6f1c5258c7dcd0a60020b0d886929e78155bc3877e22706b14cf0468f6cc801ff15857ea02b047a8f0e155521b5a588b71097ab2ce3e09eaed15
+  languageName: node
+  linkType: hard
+
+"testcafe@npm:2.5.0":
+  version: 2.5.0
+  resolution: "testcafe@npm:2.5.0"
   dependencies:
     "@babel/core": ^7.12.1
     "@babel/plugin-proposal-async-generator-functions": ^7.12.1
@@ -8541,7 +8619,7 @@ __metadata:
     callsite-record: ^4.0.0
     chai: 4.3.4
     chalk: ^2.3.0
-    chrome-remote-interface: ^0.31.3
+    chrome-remote-interface: ^0.32.1
     coffeescript: ^2.3.1
     commander: ^8.3.0
     debug: ^4.3.1
@@ -8592,10 +8670,11 @@ __metadata:
     resolve-from: ^4.0.0
     sanitize-filename: ^1.6.0
     semver: ^5.6.0
+    set-cookie-parser: ^2.5.1
     source-map-support: ^0.5.16
     strip-bom: ^2.0.0
     testcafe-browser-tools: 2.0.23
-    testcafe-hammerhead: 28.4.2
+    testcafe-hammerhead: 30.1.0
     testcafe-legacy-api: 5.1.6
     testcafe-reporter-dashboard: ^0.2.10
     testcafe-reporter-json: ^2.1.0
@@ -8604,6 +8683,7 @@ __metadata:
     testcafe-reporter-spec: ^2.1.1
     testcafe-reporter-xunit: ^2.2.1
     testcafe-safe-storage: ^1.1.1
+    testcafe-selector-generator: ^0.1.0
     time-limit-promise: ^1.0.2
     tmp: 0.0.28
     tree-kill: ^1.2.2
@@ -8612,7 +8692,7 @@ __metadata:
     url-to-options: ^2.0.0
   bin:
     testcafe: bin/testcafe-with-v8-flag-filter.js
-  checksum: 1b64a4bf349fcfb4b7b86bc55fc3ba596d4cab391267db12ad90764dbd7886aa3aba4ce5a08cb5258677c4902a5e57f79aca520fc27096e5b51703ace50598a8
+  checksum: 559afff7957819dafca8cb61f5de19870e61f569bfed58c53c6a7610d93ca3d389251b3275b2375a74fe42dcfdd9a1e806d73d8f6464a72c5907a357e8baa181
   languageName: node
   linkType: hard
 
@@ -8935,6 +9015,13 @@ __metadata:
   bin:
     uglifyjs: bin/uglifyjs
   checksum: 20d1fcac05e74db949a9579a36f9a1af88430e590bc9c22410b76686035c55cef65247ca1935d2f6440c78928227684219c8b1ddfcd858213049cb2890821392
+  languageName: node
+  linkType: hard
+
+"underscore@npm:~1.12.1":
+  version: 1.12.1
+  resolution: "underscore@npm:1.12.1"
+  checksum: ec327603aa112b99fe9d74cd9bf3b3b7451465a9d2610ceab269a532e3f191650ab017903be34dc86fe406a11d04d8905a3b04dd4c129493e51bee09a3f3074c
   languageName: node
   linkType: hard
 
