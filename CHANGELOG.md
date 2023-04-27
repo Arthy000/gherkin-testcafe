@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v6.0.1...v7.0.0) (2023-04-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **cucumber:** TestCafe 1.20 and Cucumber 8 have been removed from the peer dependencies, risks of
+warnings when updating this package if older versions of the dependencies were used
+
+* **cucumber:** update cucumber dependencies and peer dependencies ([#132](https://github.com/Arthy000/gherkin-testcafe/issues/132)) ([f1f772a](https://github.com/Arthy000/gherkin-testcafe/commit/f1f772a09bf00f215826fc66ea7e8d7581040516)), closes [#130](https://github.com/Arthy000/gherkin-testcafe/issues/130)
+
 ### [6.0.1](https://github.com/Arthy000/gherkin-testcafe/compare/v6.0.0...v6.0.1) (2023-04-27)
 
 ## [6.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v5.5.1...v6.0.0) (2023-02-25)
