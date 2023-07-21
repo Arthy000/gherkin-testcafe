@@ -64,8 +64,7 @@
   },
   "peerDependencies": {
     "@cucumber/cucumber": "^9.1.0",
-    "@cucumber/cucumber-expressions": "^16.0.0",
-    "testcafe": "^2.0.0 <= 2.5.0"
+    "@cucumber/cucumber-expressions": "^16.0.0"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^9.1.0",

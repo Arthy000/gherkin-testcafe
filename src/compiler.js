@@ -200,13 +200,23 @@ module.exports = class GherkinTestcafeCompiler {
           const test = new Test(testFile)(`${scenarioNode.scenario.keyword}: ${scenario.name}`, async (t) => {
             let error;
             let index = 0;
-
+            let stepName;
+            console.log(test);
             try {
+              process.stdout.write('\n');
               for (const step of scenario.steps) {
+                stepName = step.text;
+                process.stdout.write(chalk.gray(stepName));
                 await this._resolveAndRunStepDefinition(t, step);
+                process.stdout.clearLine();
+                process.stdout.cursorTo(0);
+                console.log(chalk.green(stepName));
                 index += 1;
               }
             } catch (e) {
+              process.stdout.clearLine();
+              process.stdout.cursorTo(0);
+              console.log(chalk.red(stepName));
               error = e;
               setFailIndex(test, index);
             }
