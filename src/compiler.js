@@ -193,7 +193,15 @@ module.exports = class GherkinTestcafeCompiler {
           const backgroundNode = gherkinDocument.feature.children.find((node) => node.background);
 
           const scenarioNode = gherkinDocument.feature.children
-            .filter((node) => node.scenario)
+            .flatMap((node) => {
+              if (node.scenario) {
+                return [node];
+              } else if (node.rule) {
+                return node.rule.children.filter((childNode) => childNode.scenario);
+              } else {
+                return [];
+              }
+            })
             .find((node) => node.scenario.id === scenario.astNodeIds[0]);
 
           const setFailIndex = (test, index) => test.meta({ failIndex: index });
