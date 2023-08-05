@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://github.com/Arthy000/gherkin-testcafe/compare/v7.0.0...v7.1.0) (2023-08-05)
+
+
+### Features
+
+* **compiler:** add support for the Gherkin Rule keyword ([#135](https://github.com/Arthy000/gherkin-testcafe/issues/135)) ([0fcbb86](https://github.com/Arthy000/gherkin-testcafe/commit/0fcbb86d1e518a47be9e6a3b2e6af652593ea597)), closes [#134](https://github.com/Arthy000/gherkin-testcafe/issues/134)
+* **testcafe:** add support for latest versions of testcafe ([#138](https://github.com/Arthy000/gherkin-testcafe/issues/138)) ([369175c](https://github.com/Arthy000/gherkin-testcafe/commit/369175ca86b02994d34e658bba572d46a9979a66)), closes [#133](https://github.com/Arthy000/gherkin-testcafe/issues/133)
+
 ## [7.0.0](https://github.com/Arthy000/gherkin-testcafe/compare/v6.0.1...v7.0.0) (2023-04-27)
 
 
