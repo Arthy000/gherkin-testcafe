@@ -1,9 +1,9 @@
 import { existsSync } from 'fs';
 import { Given, When, Then } from '@cucumber/cucumber';
-import { Selector } from 'testcafe';
+import { Selector } from 'gherkin-testcafe';
 
 const linkSelector = Selector(
-  'div.row:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > a:nth-child(3)'
+  'div.row:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > a:nth-child(3)',
 );
 
 Given('I created an HTTP authentication file for my feature', async (t) => {

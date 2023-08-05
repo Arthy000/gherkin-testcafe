@@ -1,5 +1,5 @@
 import { Given, Then } from '@cucumber/cucumber';
-import { Selector } from 'testcafe';
+import { Selector } from 'gherkin-testcafe';
 
 Given("I opened TestCafe's demo page", async (t) => {
   await t.navigateTo('https://devexpress.github.io/testcafe/example/');

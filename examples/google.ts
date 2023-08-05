@@ -1,5 +1,5 @@
 import { Given, When, Then, Before } from '@cucumber/cucumber';
-import { Selector as NativeSelector } from '../src'; // use 'gherkin-testcafe' outside of this repository
+import { Selector as NativeSelector } from 'gherkin-testcafe';
 
 const Selector = (input, t) => {
   return NativeSelector(input).with({ boundTestRun: t });
@@ -47,7 +47,7 @@ Then(
   /^I should see that the first Google's result is "(.+)"$/,
   async (t: TestController, [expectedSearchResult]: string[]) => {
     await expectGoogleResult(t, expectedSearchResult);
-  }
+  },
 );
 
 Then(/^I should see that the first Google's result is as expected$/, async (t: TestController) => {
