@@ -3,6 +3,7 @@ Following combinations of versions of Gherkin-TestCafe and TestCafe have been te
 
 | GTC version | TC versions (peer dependencies) | TC versions (not peer dependencies) |
 | - | - | - |
+| 7.1.1 | ^2.0.0 <= 3.2.0 | / |
 | 7.1.0 | ^2.0.0 <= 3.1.0 | / |
 | 7.0.0 | ^2.0.0 <= 2.5.0 | / |
 | 6.0.1 | ^2.0.0 <= 2.5.0 | / |
