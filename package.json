@@ -34,27 +34,27 @@
   "scripts": {
     "prettier": "prettier --write 'src/**/*.js' README.md main.js index.d.ts",
     "prettier-check": "prettier --list-different 'src/**/*.{js,yaml,yml,json,md}'",
-    "examples": "node main.js chrome ./examples/* --param-type-registry-file ./examples/custom-param-type-registry.js --reporter gtc-reporter-minimal --tags ~@featureTag",
-    "google-example": "node main.js chrome ./examples/google.*",
-    "docstring-example": "node main.js chrome ./examples/doc-strings.*",
-    "datatable-example": "node main.js chrome ./examples/datatable.*",
-    "custom-param-type-example": "node main.js chrome examples/google.ts ./examples/custom-param-type.* --param-type-registry-file ./examples/custom-param-type-registry.js",
-    "http-auth-example": "node main.js chrome ./examples/http-authentication-example.*",
-    "error-reporting-example": "node main.js chrome ./examples/error-reporting* ./examples/google.ts",
-    "hooks-example": "node main.js chrome ./examples/hooks*",
-    "rules-example": "node main.js chrome ./examples/rules.*",
-    "tags-1-example": "node main.js chrome ./examples/tags.* --tags @scenarioTag1",
-    "tags-not1-example": "node main.js chrome ./examples/tags.* --tags ~@scenarioTag1",
-    "tags-1or2-example": "node main.js chrome ./examples/tags.* --tags @scenarioTag1,@scenarioTag2",
-    "tags-1and2-example": "node main.js chrome ./examples/tags.* --tags '@scenarioTag1 and @scenarioTag2'",
-    "tags-1butnot2-example": "node main.js chrome ./examples/tags.* --tags '@scenarioTag1,~@scenarioTag2'",
-    "tags-1xor2-example": "node main.js chrome ./examples/tags.* --tags '@scenarioTag1 and ~@scenarioTag2,@scenarioTag2 and ~@scenarioTag1'",
-    "tags-examples": "yarn tags-1-example && yarn tags-not1-example && yarn tags-1or2-example && yarn tags-1and2-example && yarn tags-1butnot2-example && yarn tags-1xor2-example",
     "gitcommit": "git-cz",
     "gitrecommit": "git-cz --retry",
     "gitamend": "git-cz --amend",
     "release": "standard-version --commit-all",
-    "test": "jest"
+    "test": "jest",
+    "tags:include-1": "node main.js chrome ./examples/tags.* --tags @scenarioTag1",
+    "tags:exclude-1": "node main.js chrome ./examples/tags.* --tags ~@scenarioTag1",
+    "tags:include-1or2": "node main.js chrome ./examples/tags.* --tags @scenarioTag1,@scenarioTag2",
+    "tags:include-1and2": "node main.js chrome ./examples/tags.* --tags '@scenarioTag1 and @scenarioTag2'",
+    "tags:include-1not2": "node main.js chrome ./examples/tags.* --tags '@scenarioTag1,~@scenarioTag2'",
+    "tags:include-1xor2": "node main.js chrome ./examples/tags.* --tags '@scenarioTag1 and ~@scenarioTag2,@scenarioTag2 and ~@scenarioTag1'",
+    "examples:basic": "node main.js chrome ./examples/google.*",
+    "examples:rules": "node main.js chrome ./examples/rules.*",
+    "examples:docstring": "node main.js chrome ./examples/doc-strings.*",
+    "examples:datatable": "node main.js chrome ./examples/datatable.*",
+    "examples:custom-param": "node main.js chrome examples/google.ts ./examples/custom-param-type.* --param-type-registry-file ./examples/custom-param-type-registry.js",
+    "examples:http-auth": "node main.js chrome ./examples/http-authentication-example.*",
+    "examples:error-reporting": "node main.js chrome ./examples/error-reporting* ./examples/google.ts",
+    "examples:hooks": "node main.js chrome ./examples/hooks*",
+    "examples:tags": "yarn tags:include-1 && yarn tags:exclude-1 && yarn tags:include-1or2 && yarn tags:include-1and2 && yarn tags:include-1not2 && yarn tags:include-1xor2",
+    "examples": "yarn examples:tags && node main.js chrome ./examples/* --param-type-registry-file ./examples/custom-param-type-registry.js --reporter gtc-reporter-minimal --tags ~@featureTag"
   },
   "dependencies": {
     "@cucumber/gherkin": "^26.2.0",
@@ -66,17 +66,17 @@
   "peerDependencies": {
     "@cucumber/cucumber": "^9.1.0",
     "@cucumber/cucumber-expressions": "^16.0.0",
-    "testcafe": "^2.0.0 <= 3.1.0"
+    "testcafe": "^2.0.0 <= 3.2.0"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "9.3.0",
+    "@cucumber/cucumber": "9.4.0",
     "@cucumber/cucumber-expressions": "^16.1.2",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "3.3.0",
-    "jest": "^29.6.2",
-    "prettier": "^3.0.1",
+    "jest": "^29.6.4",
+    "prettier": "^3.0.2",
     "standard-version": "^9.5.0",
-    "testcafe": "3.1.0"
+    "testcafe": "3.2.0"
   },
   "config": {
     "commitizen": {
