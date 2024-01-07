@@ -19,7 +19,7 @@ Feature: The big search feature
     Examples:
       | keyword  | result-text |
       | facebook | Facebook    |
-      | twitter  | Twitter     |
+      | twitter  | X.          |
 
   @googleHook
   Scenario: Searching for hook keyword on Google
