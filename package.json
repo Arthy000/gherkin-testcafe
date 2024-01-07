@@ -88,5 +88,5 @@
       "postbump": "node ./tools/update-version-matrix.js && git add version-matrix.md tools/version-matrix.json"
     }
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@4.0.2"
 }
