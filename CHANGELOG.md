@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.2.0](https://github.com/Arthy000/gherkin-testcafe/compare/v7.1.2...v7.2.0) (2024-01-07)
+
+
+### Features
+
+* **cucumber:** update cucumber internal deps and peer deps ([#152](https://github.com/Arthy000/gherkin-testcafe/issues/152)) ([60b4bdc](https://github.com/Arthy000/gherkin-testcafe/commit/60b4bdcbf294863823c6de193eb4dba94127c14c))
+* **testcafe:** update testcafe version in peer dependency ([#148](https://github.com/Arthy000/gherkin-testcafe/issues/148)) ([f115ec0](https://github.com/Arthy000/gherkin-testcafe/commit/f115ec03ffc26c4a6ff2ebfc65b333cf994e77a6))
+
+
+### Bug Fixes
+
+* **compiler:** fix forgotten import ([a169b79](https://github.com/Arthy000/gherkin-testcafe/commit/a169b798b27d1901a2bef0fc95288357e5ce7257))
+* **yarn:** downgrade yarn ([#153](https://github.com/Arthy000/gherkin-testcafe/issues/153)) ([078803d](https://github.com/Arthy000/gherkin-testcafe/commit/078803dd6997bb17dcd4c8730a99b1e0378e4cc7))
+
 ### [7.1.2](https://github.com/Arthy000/gherkin-testcafe/compare/v7.1.1...v7.1.2) (2023-09-04)
 
 
