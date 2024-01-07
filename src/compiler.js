@@ -12,8 +12,7 @@ const TestcafeTypescriptCompiler = require('testcafe/lib/compiler/test-file/form
 const CustomizableCompilers = require('testcafe/lib/configuration/customizable-compilers');
 const { readFileSync, existsSync } = require('fs');
 const { IdGenerator } = require('@cucumber/messages');
-
-const chalk = import('chalk');
+const chalk = require('chalk');
 
 const AND_SEPARATOR = ' and ';
 
