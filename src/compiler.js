@@ -12,7 +12,8 @@ const TestcafeTypescriptCompiler = require('testcafe/lib/compiler/test-file/form
 const CustomizableCompilers = require('testcafe/lib/configuration/customizable-compilers');
 const { readFileSync, existsSync } = require('fs');
 const { IdGenerator } = require('@cucumber/messages');
-const chalk = require('chalk');
+
+const chalk = import('chalk');
 
 const AND_SEPARATOR = ' and ';
 
@@ -92,7 +93,7 @@ module.exports = class GherkinTestcafeCompiler {
           ...gherkinResult
             .filter(({ attachment }) => Boolean(attachment))
             .map(({ attachment }) => attachment.source.uri + attachment.data),
-        ].join('\n')
+        ].join('\n'),
       );
     }
     return { gherkinResult, gherkinDocument, testFile, fixture };
@@ -128,19 +129,19 @@ module.exports = class GherkinTestcafeCompiler {
         const missingFeatureSteps = featureSteps.filter((step) => !this._findStepDefinition(step));
 
         return { featureTitle, featureSteps, missingFeatureSteps };
-      })
+      }),
     );
 
     featureStepsArray.map(({ featureTitle, featureSteps, missingFeatureSteps }) => {
       const color = missingFeatureSteps.length === 0 ? 'green' : 'red';
       console.log(`\n   ${featureTitle}`);
       console.log(
-        `     Steps: ${chalk[color](`${featureSteps.length - missingFeatureSteps.length}/${featureSteps.length}`)}`
+        `     Steps: ${chalk[color](`${featureSteps.length - missingFeatureSteps.length}/${featureSteps.length}`)}`,
       );
       if (missingFeatureSteps.length) {
         console.log(
           `     Missing steps:`,
-          chalk.red(missingFeatureSteps.reduce((acc, cur) => `${acc}\n        ${cur}`, ''))
+          chalk.red(missingFeatureSteps.reduce((acc, cur) => `${acc}\n        ${cur}`, '')),
         );
       }
     });
@@ -176,7 +177,7 @@ module.exports = class GherkinTestcafeCompiler {
           .filter((filename) => existsSync(filename));
         if (foundCredentialFiles.length > 1) {
           console.warn(
-            `Looks like you have several credential files for ${specFile}. ${foundCredentialFiles[0]} will be used`
+            `Looks like you have several credential files for ${specFile}. ${foundCredentialFiles[0]} will be used`,
           );
         }
 
@@ -233,7 +234,7 @@ module.exports = class GherkinTestcafeCompiler {
                   : '',
               steps: scenario.steps.map(({ type, text, astNodeIds }) => {
                 const backgroundStepNode = backgroundNode?.background.steps.find(
-                  (stepNode) => stepNode.id === astNodeIds[0]
+                  (stepNode) => stepNode.id === astNodeIds[0],
                 );
                 const stepNode = scenarioNode.scenario.steps.find((stepNode) => stepNode.id === astNodeIds[0]);
                 return {
@@ -251,7 +252,7 @@ module.exports = class GherkinTestcafeCompiler {
         });
 
         return testFile.collectedTests;
-      })
+      }),
     );
 
     tests = tests.reduce((agg, cur) => agg.concat(cur));
@@ -285,7 +286,7 @@ module.exports = class GherkinTestcafeCompiler {
           const code = readFileSync(filename, 'utf-8');
 
           return { code, filename };
-        })
+        }),
       );
 
       testFiles.forEach((filename, index) => {
@@ -362,7 +363,7 @@ module.exports = class GherkinTestcafeCompiler {
     if (typeof stepDefinition.pattern === 'string') {
       const cucumberExpression = new cucumberExpressions.CucumberExpression(
         stepDefinition.pattern,
-        this.cucumberExpressionParamRegistry
+        this.cucumberExpressionParamRegistry,
       );
 
       const matchResult = cucumberExpression.match(step.text);
@@ -418,7 +419,7 @@ module.exports = class GherkinTestcafeCompiler {
     const scenarioTagsList = scenario.tags.map((tag) => tag.name);
 
     return tags.every((tag) =>
-      tag.startsWith('~') ? !scenarioTagsList.includes(tag.slice(1)) : scenarioTagsList.includes(tag)
+      tag.startsWith('~') ? !scenarioTagsList.includes(tag.slice(1)) : scenarioTagsList.includes(tag),
     );
   }
 
