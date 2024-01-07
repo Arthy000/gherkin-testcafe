@@ -6,11 +6,13 @@ const Selector = (input, t) => {
 };
 
 When('I search for the "{color}" color on Google', async (t, [color]) => {
+  t.ctx.selectedColor = color;
   const input = Selector('[name="q"]', t);
   await t.typeText(input, `${color.name} code`);
 });
 
-Then('I should see the "{word}" result in the page', async (t, [value]) => {
-  const result = Selector('td', t).withText(value);
-  await t.expect(result.visible).ok();
+Then('I should see the corresponding code in the page', async (t) => {
+  const selectedColor = t.ctx.selectedColor;
+  const result = Selector('div[data-tts="answers"]>div', t);
+  await t.expect(result.innerText).contains(selectedColor.code);
 });
