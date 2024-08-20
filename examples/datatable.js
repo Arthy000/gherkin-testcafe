@@ -15,7 +15,7 @@ When('I click on 5 checkboxes', async (t, [], table) => {
   }
 });
 
-Then(/^The amount of selected checkboxes should be "(.+)"$/, async (t, [amount]) => {
+Then(/^the amount of selected checkboxes should be "(.+)"$/, async (t, [amount]) => {
   const selectedCheckboxes = Selector('input[type="checkbox"]').filter((checkbox) =>
     Boolean(checkbox && checkbox.checked),
   );
