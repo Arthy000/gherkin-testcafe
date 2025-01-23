@@ -4,9 +4,8 @@ Feature: Using custom parameter types
 
   @googleHook
   Scenario: Searching for blue color in Google
-    Given I opened Google's search page
-    And I dismissed the privacy statement when it appeared
-    When I search for the "blue" color on Google
+    Given I opened a search page
+    When I search for the "blue" color
     And I press the "enter" key
     Then I should see the corresponding code in the page
 
