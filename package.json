@@ -1,6 +1,6 @@
 {
   "name": "gherkin-testcafe",
-  "version": "7.3.0",
+  "version": "7.4.0",
   "author": "Lukas Kullmann <lukas.kullmann@kiwigrid.com>",
   "contributors": [
     "Wilhelm Behncke <behncke@sitegeist.de>",
@@ -57,26 +57,26 @@
     "examples": "yarn examples:tags && node main.js firefox ./examples/* --param-type-registry-file ./examples/custom-param-type-registry.js --reporter gtc-reporter-minimal --tags ~@featureTag"
   },
   "dependencies": {
-    "@cucumber/gherkin": "^29.0.0",
+    "@cucumber/gherkin": "^30.0.4",
     "@cucumber/gherkin-streams": "^5.0.1",
     "@cucumber/message-streams": "^4.0.1",
-    "@cucumber/messages": "^26.0.0",
+    "@cucumber/messages": "^27.0.2",
     "chalk": "4.1.2"
   },
   "peerDependencies": {
     "@cucumber/cucumber": "^10.9.0",
     "@cucumber/cucumber-expressions": "^17.1.0",
-    "testcafe": "^3.6.0"
+    "testcafe": "^3.7.0"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "10.9.0",
-    "@cucumber/cucumber-expressions": "^17.1.0",
-    "commitizen": "^4.3.0",
+    "@cucumber/cucumber": "11.2.0",
+    "@cucumber/cucumber-expressions": "^18.0.1",
+    "commitizen": "^4.3.1",
     "cz-conventional-changelog": "3.3.0",
     "jest": "^29.7.0",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.2",
     "standard-version": "^9.5.0",
-    "testcafe": "3.6.2"
+    "testcafe": "3.7.1"
   },
   "config": {
     "commitizen": {
